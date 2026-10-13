@@ -1,0 +1,9 @@
+instance,w4,status,proven_optimal,gp_objective,objective_check,understaffed_nurse_slots,understaffing_penalty,request_violations,request_penalty,fairness_penalty,workload_range_min,assignments,hard_constraints_ok,seconds,time_limit
+Instance3,0.0,Optimal,True,1001.0,True,10,1000.0,1,1.0,0.0,2400,144,True,130.6,900
+Instance3,0.1,Optimal,True,1315.0,True,10,1000.0,2,3.0,312.0,2400,144,True,406.9,900
+Instance3,0.2,Optimal,True,1627.0,True,10,1000.0,3,3.0,624.0,2400,144,True,384.2,900
+Instance3,0.21,Optimal,True,1652.0000000000005,True,14,1400.0,0,0.0,252.0,1920,140,True,21.6,900
+Instance3,0.25,Optimal,True,1700.0,True,14,1400.0,0,0.0,300.0,1920,140,True,59.7,900
+Instance3,0.3,Optimal,True,1760.0,True,14,1400.0,0,0.0,360.0,1920,140,True,43.9,900
+Instance3,0.5,Optimal,True,2000.0,True,14,1400.0,0,0.0,600.0,1920,140,True,27.8,900
+Instance3,1.0,Optimal,True,2600.0,True,14,1400.0,0,0.0,1200.0,1920,140,True,63.0,900

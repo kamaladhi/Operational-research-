@@ -1,0 +1,94 @@
+{
+  "ip": {
+    "status": "Optimal",
+    "proven_optimal": true,
+    "source": "saved reference run",
+    "objective": 828.0,
+    "solve_time": 1.58,
+    "validation_passed": true
+  },
+  "gp": {
+    "status": "Optimal",
+    "proven_optimal": true,
+    "source": "saved reference run",
+    "objective": 1694.0,
+    "solve_time": 0.35,
+    "validation_passed": true,
+    "weights": {
+      "w1_understaffing": 1.0,
+      "w2_requests": 1.0,
+      "w3_overstaffing": 1.0,
+      "w4_fairness": 0.5
+    }
+  },
+  "benchmark": {
+    "reference": 828.0,
+    "ip_gap": 0.0,
+    "ip_gap_pct": 0.0,
+    "gp_benchmark_comparable": false
+  },
+  "ip_coverage": {
+    "total_required_nurse_slots": 108,
+    "total_assigned_nurse_slots": 100,
+    "total_understaffed_slots": 4,
+    "total_overstaffed_slots": 0,
+    "total_understaffing_magnitude": 8,
+    "total_overstaffing_magnitude": 0,
+    "weighted_understaffing_penalty": 800.0,
+    "weighted_overstaffing_penalty": 0.0,
+    "coverage_rate_pct": 92.59
+  },
+  "gp_coverage": {
+    "total_required_nurse_slots": 108,
+    "total_assigned_nurse_slots": 96,
+    "total_understaffed_slots": 7,
+    "total_overstaffed_slots": 0,
+    "total_understaffing_magnitude": 12,
+    "total_overstaffing_magnitude": 0,
+    "weighted_understaffing_penalty": 1200.0,
+    "weighted_overstaffing_penalty": 0.0,
+    "coverage_rate_pct": 88.89
+  },
+  "ip_workload": {
+    "mean": 3428.6,
+    "min": 1920,
+    "max": 4320,
+    "range": 2400,
+    "std_dev": 974.6,
+    "jain_fairness_index": 0.9252
+  },
+  "gp_workload": {
+    "mean": 3291.4,
+    "min": 1920,
+    "max": 3840,
+    "range": 1920,
+    "std_dev": 867.4,
+    "jain_fairness_index": 0.9351
+  },
+  "ip_requests": {
+    "total_on_requests": 50,
+    "total_off_requests": 12,
+    "on_violations": 17,
+    "off_violations": 1,
+    "total_violations": 18,
+    "violation_rate_pct": 29.03,
+    "weighted_penalty": 28.0
+  },
+  "gp_requests": {
+    "total_on_requests": 50,
+    "total_off_requests": 12,
+    "on_violations": 11,
+    "off_violations": 0,
+    "total_violations": 11,
+    "violation_rate_pct": 17.74,
+    "weighted_penalty": 14.0
+  },
+  "trade_off_summary": [
+    "IP objective (828) equals the best-known benchmark value 828; the IP solution is proven optimal by CBC. GP objective is NOT benchmark-comparable (includes workload-fairness term).",
+    "IP achieves lower understaffing penalty (800.0) vs GP (1200.0) \u2014 difference: 400.",
+    "GP has fewer request violations (11 of 62) than IP (18).",
+    "GP achieves higher workload fairness (Jain index 0.9351) vs IP (0.9252). GP workload range: 1920 min; IP: 2400 min.",
+    "These are inherent model trade-offs. No single model dominates on all metrics. The choice between IP and GP depends on which objectives the hospital prioritises."
+  ],
+  "note": "GP objective (1694) and IP objective (828) use different objective functions and must NOT be compared as raw numbers. IP is benchmark-oriented; GP adds a workload-fairness component. Compare using the component-level metrics: coverage, requests, and workload fairness."
+}
