@@ -1,0 +1,10 @@
+Contract,Valid shifts,Min rest (min),Max consecutive,Min consecutive,Min days off,Max total by shift,Min workload (min),Max workload (min),Max working weekends
+All,all,840.0,,,,-,,,
+A,D,,5.0,2.0,2.0,-,3360.0,4320.0,1.0
+B,D,,5.0,2.0,2.0,-,3360.0,4320.0,1.0
+C,D,,5.0,2.0,2.0,-,3360.0,4320.0,1.0
+D,D,,5.0,2.0,2.0,-,3360.0,4320.0,1.0
+E,D,,5.0,2.0,2.0,-,3360.0,4320.0,1.0
+F,D,,5.0,2.0,2.0,-,3360.0,4320.0,1.0
+G,D,,5.0,2.0,2.0,-,3360.0,4320.0,1.0
+H,D,,5.0,2.0,2.0,-,3360.0,4320.0,1.0

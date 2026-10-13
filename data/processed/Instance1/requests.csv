@@ -1,0 +1,27 @@
+Nurse,Day,Weekday,Shift,Type,Weight
+A,2,Wed,D,ShiftOn (wants to work),2
+A,3,Thu,D,ShiftOn (wants to work),2
+B,0,Mon,D,ShiftOn (wants to work),3
+B,1,Tue,D,ShiftOn (wants to work),3
+B,2,Wed,D,ShiftOn (wants to work),3
+B,3,Thu,D,ShiftOn (wants to work),3
+B,4,Fri,D,ShiftOn (wants to work),3
+C,0,Mon,D,ShiftOn (wants to work),1
+C,1,Tue,D,ShiftOn (wants to work),1
+C,2,Wed,D,ShiftOn (wants to work),1
+C,3,Thu,D,ShiftOn (wants to work),1
+C,4,Fri,D,ShiftOn (wants to work),1
+C,12,Sat,D,ShiftOff (wants off),1
+C,13,Sun,D,ShiftOff (wants off),1
+D,8,Tue,D,ShiftOn (wants to work),2
+D,9,Wed,D,ShiftOn (wants to work),2
+F,0,Mon,D,ShiftOn (wants to work),2
+F,1,Tue,D,ShiftOn (wants to work),2
+F,8,Tue,D,ShiftOff (wants off),3
+H,2,Wed,D,ShiftOff (wants off),3
+H,3,Thu,D,ShiftOff (wants off),3
+H,9,Wed,D,ShiftOn (wants to work),1
+H,10,Thu,D,ShiftOn (wants to work),1
+H,11,Fri,D,ShiftOn (wants to work),1
+H,12,Sat,D,ShiftOn (wants to work),1
+H,13,Sun,D,ShiftOn (wants to work),1

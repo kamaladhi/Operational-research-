@@ -1,0 +1,11 @@
+# Normalise line endings of source and documentation files.
+* text=auto
+*.bat text eol=crlf
+
+# The benchmark files are used unmodified (Instance3.xml is byte-identical to the official file),
+# so git must never rewrite their line endings.
+data/raw/* -text
+
+# Binary files
+*.docx binary
+*.png binary

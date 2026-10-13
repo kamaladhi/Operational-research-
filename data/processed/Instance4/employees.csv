@@ -1,0 +1,11 @@
+Nurse,Contracts,Valid shifts,Min workload (min),Max workload (min),Min shifts,Max shifts,Max consecutive,Min consecutive,Min days off,Max total by shift,Max working weekends,Fixed days off,ShiftOn requests,ShiftOff requests,Request weight total
+A,"All, A","E, L",7560,8640,16,18,5,2,2,-,2,2,3,0,5
+B,"All, B",E,7560,8640,16,18,5,2,2,-,2,2,4,2,14
+C,"All, C","E, L",7560,8640,16,18,5,2,2,-,2,2,9,0,23
+D,"All, D","E, L",7560,8640,16,18,5,2,2,-,2,2,10,0,15
+E,"All, E","E, L",7560,8640,16,18,5,2,2,-,2,2,4,5,27
+F,"All, F",L,7560,8640,16,18,5,2,2,-,2,2,3,6,17
+G,"All, G","E, L",7560,8640,16,18,5,2,2,-,2,2,8,0,24
+H,"All, H","E, L",7560,8640,16,18,5,2,2,-,2,2,1,0,3
+I,"All, I","E, L",7560,8640,16,18,5,2,2,-,2,2,10,0,20
+J,"All, J","E, L",7560,8640,16,18,5,2,2,-,2,2,0,6,12

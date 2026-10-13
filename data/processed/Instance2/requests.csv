@@ -1,0 +1,63 @@
+Nurse,Day,Weekday,Shift,Type,Weight
+A,5,Sat,L,ShiftOn (wants to work),1
+A,6,Sun,L,ShiftOn (wants to work),1
+A,7,Mon,L,ShiftOn (wants to work),1
+A,8,Tue,L,ShiftOn (wants to work),1
+A,9,Wed,L,ShiftOn (wants to work),1
+B,7,Mon,E,ShiftOn (wants to work),1
+B,8,Tue,E,ShiftOn (wants to work),1
+B,9,Wed,E,ShiftOn (wants to work),1
+B,10,Thu,E,ShiftOn (wants to work),1
+C,8,Tue,E,ShiftOn (wants to work),1
+C,9,Wed,E,ShiftOn (wants to work),1
+C,10,Thu,E,ShiftOn (wants to work),1
+C,11,Fri,E,ShiftOn (wants to work),1
+D,1,Tue,E,ShiftOn (wants to work),1
+D,2,Wed,E,ShiftOn (wants to work),1
+D,3,Thu,E,ShiftOn (wants to work),1
+E,3,Thu,L,ShiftOn (wants to work),1
+E,4,Fri,L,ShiftOn (wants to work),1
+E,5,Sat,L,ShiftOn (wants to work),1
+E,6,Sun,L,ShiftOn (wants to work),1
+E,7,Mon,L,ShiftOn (wants to work),1
+E,12,Sat,L,ShiftOn (wants to work),2
+E,13,Sun,L,ShiftOn (wants to work),2
+F,3,Thu,L,ShiftOn (wants to work),3
+F,4,Fri,L,ShiftOn (wants to work),3
+F,5,Sat,L,ShiftOn (wants to work),3
+G,3,Thu,E,ShiftOff (wants off),2
+G,4,Fri,E,ShiftOff (wants off),2
+G,5,Sat,E,ShiftOff (wants off),2
+G,6,Sun,E,ShiftOff (wants off),2
+G,7,Mon,E,ShiftOff (wants off),2
+H,1,Tue,L,ShiftOff (wants off),2
+I,2,Wed,L,ShiftOn (wants to work),3
+I,3,Thu,L,ShiftOn (wants to work),3
+I,12,Sat,E,ShiftOn (wants to work),2
+J,1,Tue,E,ShiftOff (wants off),1
+J,2,Wed,E,ShiftOff (wants off),1
+J,3,Thu,E,ShiftOff (wants off),1
+J,4,Fri,E,ShiftOff (wants off),1
+J,5,Sat,E,ShiftOff (wants off),1
+J,11,Fri,L,ShiftOn (wants to work),3
+K,7,Mon,L,ShiftOn (wants to work),1
+K,8,Tue,L,ShiftOn (wants to work),1
+K,9,Wed,L,ShiftOn (wants to work),1
+L,3,Thu,L,ShiftOn (wants to work),1
+L,4,Fri,L,ShiftOn (wants to work),1
+L,10,Thu,L,ShiftOn (wants to work),3
+L,11,Fri,L,ShiftOn (wants to work),3
+L,12,Sat,L,ShiftOn (wants to work),3
+L,13,Sun,L,ShiftOn (wants to work),3
+M,3,Thu,L,ShiftOn (wants to work),1
+M,4,Fri,L,ShiftOn (wants to work),1
+M,5,Sat,L,ShiftOn (wants to work),1
+M,6,Sun,L,ShiftOn (wants to work),1
+M,7,Mon,L,ShiftOn (wants to work),1
+M,11,Fri,L,ShiftOff (wants off),1
+N,0,Mon,E,ShiftOn (wants to work),2
+N,1,Tue,E,ShiftOn (wants to work),2
+N,2,Wed,E,ShiftOn (wants to work),2
+N,8,Tue,E,ShiftOn (wants to work),3
+N,9,Wed,E,ShiftOn (wants to work),3
+N,10,Thu,E,ShiftOn (wants to work),3

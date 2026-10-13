@@ -1,0 +1,21 @@
+Nurse,Day,Weekday,Assignment
+A,5,Sat,Day off
+A,6,Sun,Day off
+B,11,Fri,Day off
+B,16,Wed,Day off
+C,13,Sun,Day off
+C,14,Mon,Day off
+D,2,Wed,Day off
+D,12,Sat,Day off
+E,23,Wed,Day off
+E,24,Thu,Day off
+F,8,Tue,Day off
+F,17,Thu,Day off
+G,25,Fri,Day off
+G,26,Sat,Day off
+H,10,Thu,Day off
+H,11,Fri,Day off
+I,19,Sat,Day off
+I,20,Sun,Day off
+J,21,Mon,Day off
+J,24,Thu,Day off

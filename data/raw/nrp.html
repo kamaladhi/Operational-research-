@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6V76XC45M9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6V76XC45M9');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/main.css">
+
+<style>
+
+</style>
+
+<title>Nurse Rostering Benchmark Instances</title>
+
+<script type="application/ld+json">
+{
+    "@context":"https://schema.org/",
+    "@type":"Dataset",
+    "name":"Nurse Rostering Benchmark Instances",
+    "description":"Benchmark test data instances for the nurse rostering problem (NRP).",  
+
+    "keywords":[
+       "Nurse",
+       "Rostering",
+       "Shift",
+       "Scheduling"
+    ],
+
+    "citation": "https://doi.org/10.1016/j.ejor.2014.01.039",
+
+    "creator": [
+      {
+          "@type": "Person",
+          "sameAs": "https://orcid.org/0000-0002-4743-416X",
+          "givenName": "Tim",
+          "familyName": "Curtois",
+          "name": "Tim Curtois"
+      }
+    ],
+
+    "distribution":[
+       {
+          "@type":"DataDownload",
+          "encodingFormat":"TXT",
+          "contentUrl":"http://www.schedulingbenchmarks.org/nrp/data/instances1_24.zip"
+       },
+       {
+          "@type":"DataDownload",
+          "encodingFormat":"XML",
+          "contentUrl":"http://www.schedulingbenchmarks.org/nrp/data/instances1_24.zip"
+       }
+    ]
+
+}
+</script>
+
+</head>
+ 
+ <body id="page">
+ 	<div class="body-wrapper-inner"> 
+					<div id="page-body-inner">
+							<div class="grid-nine">											
+													<div class="grid-six">
+
+<p class="header">Nurse Rostering Benchmark Instances</p> 
+   
+<p class="toplinks">[ <a class="top" href="../index.html">home</a> ]
+   [ nurse ]
+   [ <a class="top" href="../matsp">multi-activity</a> ]
+   [ <a class="top" href="../changes.html">changes</a> ]
+   [ <a class="top" href="../index.html#contact">contact</a> ]</p>														
+													
+<p style="margin-bottom : 10px; margin-top:10px;" class="sideHeader"><a class="anch" name="new_instances">Instances 1..24</a></p>
+
+<div style="text-align: justify;">
+<p style="margin-bottom : 0px; margin-top:0px;">
+These instances are available in a plain text file format as well as an XML format. See also :
+</p>
+<ul  style=" margin-top:8px; list-style-type:none; padding-left: 16px;">
+
+  <li>- A <a href="data/instances1_24.zip">zip</a> file of all the instances. </li>
+
+  <li>- The file <a href="instances1_24.html">format</a> guide and how to interpret 
+      the constraints and objectives.</li>
+
+  <li>- How to <a href="verify.html">verify</a> new solutions.</li>
+
+  <li>- An initial set of results and an integer programming model for these instances is 
+  <a href="../papers/computational_results_on_new_staff_scheduling_benchmark_instances.pdf">here</a>
+  (<a href="data/instances1_24solutions.zip">solutions</a>).</li>
+
+  <li>- New results are announced on the <a href="../changes.html">changes</a> page.</li>
+
+</ul>
+
+</div>
+
+<div style="overflow-x:auto;">
+<table class="dataTable"  cellspacing="0" cellpadding="4" border="1">
+
+<!-- Header -->
+<tr>
+ <td class="dataCell" style="text-align:center;">Instance</td>
+ <td class="dataCell" style="text-align:center;">Weeks</td>	
+ <td class="dataCell" style="text-align:center;">Employees</td>	
+ <td class="dataCell" style="text-align:center;">Shift types</td>	
+ <td class="dataCell" style="text-align:center;">Best known lower bound</td>
+ <td class="dataCell" style="text-align:center;">Best known solution</td>	
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance1 <a href="data/Instance1.txt">txt</a> <a href="data/Instance1.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">2</td>	
+ <td class="dataCell" style="text-align:right;">8</td>
+ <td class="dataCell" style="text-align:right;">1</td>
+ <td class="dataCell" style="text-align:right;">607</td>
+ <td class="dataCell" style="text-align:right;"><b>607</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance2 <a href="data/Instance2.txt">txt</a> <a href="data/Instance2.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">2</td>	
+ <td class="dataCell" style="text-align:right;">14</td>
+ <td class="dataCell" style="text-align:right;">2</td>
+ <td class="dataCell" style="text-align:right;">828</td>
+ <td class="dataCell" style="text-align:right;"><b>828</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance3 <a href="data/Instance3.txt">txt</a> <a href="data/Instance3.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">2</td>	
+ <td class="dataCell" style="text-align:right;">20</td>
+ <td class="dataCell" style="text-align:right;">3</td>
+ <td class="dataCell" style="text-align:right;">1001</td>
+ <td class="dataCell" style="text-align:right;"><b>1001</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance4 <a href="data/Instance4.txt">txt</a> <a href="data/Instance4.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">10</td>
+ <td class="dataCell" style="text-align:right;">2</td>
+ <td class="dataCell" style="text-align:right;">1716</td>
+ <td class="dataCell" style="text-align:right;"><b>1716</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance5	<a href="data/Instance5.txt">txt</a> <a href="data/Instance5.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">16</td>
+ <td class="dataCell" style="text-align:right;">2</td>
+ <td class="dataCell" style="text-align:right;">1143</td>
+ <td class="dataCell" style="text-align:right;"><b>1143</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance6	<a href="data/Instance6.txt">txt</a> <a href="data/Instance6.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">18</td>
+ <td class="dataCell" style="text-align:right;">3</td>
+ <td class="dataCell" style="text-align:right;">1950</td>
+ <td class="dataCell" style="text-align:right;"><b>1950</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance7	<a href="data/Instance7.txt">txt</a> <a href="data/Instance7.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">20</td>
+ <td class="dataCell" style="text-align:right;">3</td>
+ <td class="dataCell" style="text-align:right;">1056</td>
+ <td class="dataCell" style="text-align:right;"><b>1056</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance8	<a href="data/Instance8.txt">txt</a> <a href="data/Instance8.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">30</td>
+ <td class="dataCell" style="text-align:right;">4</td>
+ <td class="dataCell" style="text-align:right;">1300</td>
+ <td class="dataCell" style="text-align:right;"><b>1300</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance9	<a href="data/Instance9.txt">txt</a> <a href="data/Instance10.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">36</td>	
+ <td class="dataCell" style="text-align:right;">4</td>
+ <td class="dataCell" style="text-align:right;">439</td>
+ <td class="dataCell" style="text-align:right;"><b>439</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance10	<a href="data/Instance10.txt">txt</a> <a href="data/Instance10.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">40</td>
+ <td class="dataCell" style="text-align:right;">5</td>
+ <td class="dataCell" style="text-align:right;">4631</td>
+ <td class="dataCell" style="text-align:right;"><b>4631</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance11	<a href="data/Instance11.txt">txt</a> <a href="data/Instance11.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">50</td>
+ <td class="dataCell" style="text-align:right;">6</td>
+ <td class="dataCell" style="text-align:right;">3443</td>
+ <td class="dataCell" style="text-align:right;"><b>3443</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance12	<a href="data/Instance12.txt">txt</a> <a href="data/Instance12.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">60</td>	
+ <td class="dataCell" style="text-align:right;">10</td>
+ <td class="dataCell" style="text-align:right;">4040</td>
+ <td class="dataCell" style="text-align:right;"><b>4040</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance13	<a href="data/Instance13.txt">txt</a> <a href="data/Instance13.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">4</td>	
+ <td class="dataCell" style="text-align:right;">120</td>
+ <td class="dataCell" style="text-align:right;">18</td>
+ <td class="dataCell" style="text-align:right;">1348</td>
+ <td class="dataCell" style="text-align:right;"><b>1348</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance14	<a href="data/Instance14.txt">txt</a> <a href="data/Instance14.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">6</td>	
+ <td class="dataCell" style="text-align:right;">32</td>	
+ <td class="dataCell" style="text-align:right;">4</td>
+ <td class="dataCell" style="text-align:right;">1278</td>
+ <td class="dataCell" style="text-align:right;"><b>1278</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance15	<a href="data/Instance15.txt">txt</a> <a href="data/Instance15.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">6</td>	
+ <td class="dataCell" style="text-align:right;">45</td>
+ <td class="dataCell" style="text-align:right;">6</td>
+ <td class="dataCell" style="text-align:right;">3828</td>
+ <td class="dataCell" style="text-align:right;"><b>3828</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance16	<a href="data/Instance16.txt">txt</a> <a href="data/Instance16.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">8</td>	
+ <td class="dataCell" style="text-align:right;">20</td>
+ <td class="dataCell" style="text-align:right;">3</td>
+ <td class="dataCell" style="text-align:right;">3225</td>
+ <td class="dataCell" style="text-align:right;"><b>3225</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance17	<a href="data/Instance17.txt">txt</a> <a href="data/Instance17.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">8</td>	
+ <td class="dataCell" style="text-align:right;">32</td>
+ <td class="dataCell" style="text-align:right;">4</td>
+ <td class="dataCell" style="text-align:right;">5746</td>
+ <td class="dataCell" style="text-align:right;"><b>5746</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance18	<a href="data/Instance18.txt">txt</a> <a href="data/Instance18.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">12</td>	
+ <td class="dataCell" style="text-align:right;">22</td>	
+ <td class="dataCell" style="text-align:right;">3</td>
+ <td class="dataCell" style="text-align:right;">4459</td>
+ <td class="dataCell" style="text-align:right;"><b>4459</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance19	<a href="data/Instance19.txt">txt</a> <a href="data/Instance19.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">12</td>	
+ <td class="dataCell" style="text-align:right;">40</td>
+ <td class="dataCell" style="text-align:right;">5</td>
+ <td class="dataCell" style="text-align:right;">3149</td>
+ <td class="dataCell" style="text-align:right;"><b>3149</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance20	<a href="data/Instance20.txt">txt</a> <a href="data/Instance20.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">26</td>	
+ <td class="dataCell" style="text-align:right;">50</td>
+ <td class="dataCell" style="text-align:right;">6</td>
+ <td class="dataCell" style="text-align:right;">4769</td>
+ <td class="dataCell" style="text-align:right;"><b>4769</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance21	<a href="data/Instance21.txt">txt</a> <a href="data/Instance21.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">26</td>	
+ <td class="dataCell" style="text-align:right;">100</td>	
+ <td class="dataCell" style="text-align:right;">8</td>
+ <td class="dataCell" style="text-align:right;">21133</td>
+ <td class="dataCell" style="text-align:right;"><b>21133</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance22	<a href="data/Instance22.txt">txt</a> <a href="data/Instance22.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">52</td>	
+ <td class="dataCell" style="text-align:right;">50</td>
+ <td class="dataCell" style="text-align:right;">10</td>
+ <td class="dataCell" style="text-align:right;">30241</td>
+ <td class="dataCell" style="text-align:right;"><b>30241</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance23	<a href="data/Instance23.txt">txt</a> <a href="data/Instance23.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">52</td>	
+ <td class="dataCell" style="text-align:right;">100</td>
+ <td class="dataCell" style="text-align:right;">16</td>
+ <td class="dataCell" style="text-align:right;">17285</td>
+ <td class="dataCell" style="text-align:right;"><b>17285</b></td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="">Instance24	<a href="data/Instance24.txt">txt</a> <a href="data/Instance24.ros">xml</a></td>	
+ <td class="dataCell" style="text-align:right;">52</td>	
+ <td class="dataCell" style="text-align:right;">150</td>
+ <td class="dataCell" style="text-align:right;">32</td>
+ <td class="dataCell" style="text-align:right;">40438</td>
+ <td class="dataCell" style="text-align:right;">40439</td>
+</tr>
+
+</table>
+</div>
+
+<p style="margin-bottom : 0px; margin-top:10px;">
+  All solutions are verified before being reported on this website. It is not possible to verify lower bounds.
+  </p>
+
+<!-- Original instances -->
+
+<p class="sideHeader">References</p>
+
+ <ul style="margin-top: 4px; margin-bottom: 10px; list-style-type:circle;">
+ 
+  <li>Strandmark, P., Qu, Y. and Curtois, T.
+    First-order linear programming in a column generation-based heuristic approach to the nurse rostering problem. 
+    Computers & Operations Research, 2020. 120, p. 104945.
+    (<a href="https://doi.org/10.1016/j.cor.2020.104945">pdf</a>)
+   </li>
+ 
+  <li>Demirović, E., Musliu, N., and Winter, F.
+    Modeling and solving staff scheduling with partial weighted maxSAT. 
+    Annals of Operations Research, 2019. 275(1): p. 79-99.
+   </li>
+
+   <li>Smet P.  
+    Constraint reformulation for nurse rostering problems, 
+    in: PATAT 2018 twelfth international conference on the practice and theory of automated
+    timetabling, Vienna, August, 2018, p. 69-80.
+   </li>
+
+  <li>Rahimian, E., Akartunalı, K., and Levine, J.
+   A hybrid integer programming and variable neighbourhood search algorithm to solve nurse rostering problems.
+   European Journal of Operational Research, 2017. 258(2): p. 411-423.
+  </li>
+  
+ </ul>
+
+<p style="margin-bottom : 10px; margin-top:0px;"> &nbsp;</p>
+
+<div style="overflow-x:auto;">
+<table class="dataTable" cellspacing="0" cellpadding="2" border="1">
+<tr>
+ <td valign="top" class="dataCell" colspan="2" style="border-width: 0px; /*border-left-style: hidden;*/">
+  <p style="margin-bottom : 2px; margin-top:0px;" class="sideHeader"><a class="anch" name="data">Other instances</a></p>
+ </td>
+ <td class="dataCell"><span class="nobr">Best known solutions</span></td>
+</tr>
+
+<!-- GPost -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px; border-bottom-style: hidden;"><img alt="GPost" src="../images/GPost_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-bottom-width: 0px; border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/GPost.ros">GPost.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#GPost">GPost</a>
+    <!--<img alt="Flag of The Netherlands" src="../images/Flag_of_the_Netherlands.png" style="border-width:0px;"/> -->
+  </td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">8</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Schedule length</td>
+    <td class="rightColA">4 weeks</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+  </table>
+ </td>
+ 
+ <td class="dataCell" valign="top" style="border-bottom-width: 0px;">
+  <table cellpadding="0" cellspacing="1" >
+  <tr>
+    <td class="penCell"><b>5</b></td>
+    <td class="lft1"><a href="data/solutions/html/GPost.Solution.5.html">html</a></td>
+    <td><a href="data/solutions/xml/GPost.Solution.5.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">7</td>
+    <td><a href="data/solutions/html/GPost.Solution.7.html">html</a></td>
+    <td><a href="data/solutions/xml/GPost.Solution.7.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td>8</td>
+    <td><a href="data/solutions/html/GPost.Solution.8.html">html</a></td>
+    <td><a href="data/solutions/xml/GPost.Solution.8.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="dataCell" style="border-top-width: 0px;"></td>
+ <td class="dataCell" colspan="1" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="leftColA" valign="top">Other versions</td>
+    <td class="rightColA"><a href="data/GPost-B.ros">GPost-B.ros</a>
+    Same as GPost.ros but without the requests on the first two days.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="penCell"><b>3</b></td>
+    <td class="lft1"><a href="data/solutions/html/GPost-B.Solution.3.html">html</a></td>
+    <td><a href="data/solutions/xml/GPost-B.Solution.3.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">5</td>
+    <td class="lft1"><a href="data/solutions/html/GPost-B.Solution.5.html">html</a></td>
+    <td><a href="data/solutions/xml/GPost-B.Solution.5.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- SINTEF -->
+<tr>
+<td valign="top" class="dataCell" style="text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="SINTEF" src="../images/SINTEF_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/SINTEF.ros">SINTEF.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#SINTEF">SINTEF</a> 
+    <!-- <img alt="Flag of Norway" src="../images/Flag_of_Norway.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">24</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Schedule length</td>
+    <td class="rightColA">3 weeks</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="penCell"><b>0</b></td>
+    <td class="lft1"><a href="data/solutions/html/SINTEF.Solution.0.html">html</a></td>
+    <td><a href="data/solutions/xml/SINTEF.Solution.0.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td>1</td>
+    <td><a href="data/solutions/html/SINTEF.Solution.1.html">html</a></td>
+    <td><a href="data/solutions/xml/SINTEF.Solution.1.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td>2</td>
+    <td><a href="data/solutions/html/SINTEF.Solution.2.html">html</a></td>
+    <td><a href="data/solutions/xml/SINTEF.Solution.2.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- ORTEC -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="ORTEC" src="../images/ORTEC_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px; border-bottom-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/ORTEC01.ros">ORTEC01.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#ORTEC01">ORTEC</a>
+    <!-- <img alt="Flag of The Netherlands" src="../images/Flag_of_the_Netherlands.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">16</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">4</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">31 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">BUR06</a>,
+    <a href="bounds.html#references">BUR07</a>,
+    <a href="bounds.html#references">BUR07b</a>,
+    <a href="bounds.html#references">BUR07c</a>,
+    <a href="bounds.html#references">FIJ06</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top" style="border-bottom-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+  <tr>
+    <td class="penCell"><b>270</b></td>
+    <td class="lft1"><a href="data/solutions/html/ORTEC01.Solution.270.html">html</a></td>
+    <td><a href="data/solutions/xml/ORTEC01.Solution.270.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">280</td>
+    <td><a href="data/solutions/html/ORTEC01.Solution.280.html">html</a></td>
+    <td><a href="data/solutions/xml/ORTEC01.Solution.280.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">285</td>
+    <td><a href="data/solutions/html/ORTEC01.Solution.285.html">html</a></td>
+    <td><a href="data/solutions/xml/ORTEC01.Solution.285.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">290</td>
+    <td><a href="data/solutions/html/ORTEC01.Solution.290.html">html</a></td>
+    <td><a href="data/solutions/xml/ORTEC01.Solution.290.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;"></td>
+ <td colspan="1" class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="leftColA" valign="top">Other versions</td>
+    <td class="rightColA"><a href="data/ORTEC02.ros">ORTEC02.ros</a>
+    Identical to ORTEC01 except employee B has five &quot;Vacation&quot; shifts in the first full week.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+  <tr>
+    <td class="penCell"><b>270</b></td>
+    <td class="lft1"><a href="data/solutions/html/ORTEC02.Solution.270.html">html</a></td>
+    <td><a href="data/solutions/xml/ORTEC02.Solution.270.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">290</td>
+    <td class="lft1"><a href="data/solutions/html/ORTEC02.Solution.290.html">html</a></td>
+    <td><a href="data/solutions/xml/ORTEC02.Solution.290.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- QMC -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="QMC" src="../images/QMC_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top"  style="border-bottom-width: 0px; border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/QMC-1.ros">QMC-1.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#QMC">QMC</a>
+    <!-- <img alt="Flag of the United Kingdom" src="../images/Flag_of_the_United_Kingdom.png" style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">19</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">3</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">28 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top" style="border-bottom-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>13</b></td>
+    <td class="lft1"><a href="data/solutions/html/QMC-1.Solution.13.html">html</a></td>
+    <td><a href="data/solutions/xml/QMC-1.Solution.13.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">14</td>
+    <td class="lft1"><a href="data/solutions/html/QMC-1.Solution.14.html">html</a></td>
+    <td><a href="data/solutions/xml/QMC-1.Solution.14.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">15</td>
+    <td class="lft1"><a href="data/solutions/html/QMC-1.Solution.15.html">html</a></td>
+    <td><a href="data/solutions/xml/QMC-1.Solution.15.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">16</td>
+    <td class="lft1"><a href="data/solutions/html/QMC-1.Solution.16.html">html</a></td>
+    <td><a href="data/solutions/xml/QMC-1.Solution.16.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;"></td>
+ <td colspan="1" class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="leftColA" valign="top">Other versions</td>
+    <td class="rightColA"><a href="data/QMC-2.ros">QMC-2.ros</a>
+    An alternative formulation with a couple of different constraints and
+    in which cover may deviate from a preferred level.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>29</b></td>
+    <td class="lft1"><a href="data/solutions/html/QMC-2.Solution.29.html">html</a></td>
+    <td><a href="data/solutions/xml/QMC-2.Solution.29.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">30</td>
+    <td class="lft1"><a href="data/solutions/html/QMC-2.Solution.30.html">html</a></td>
+    <td><a href="data/solutions/xml/QMC-2.Solution.30.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">31</td>
+    <td><a href="data/solutions/html/QMC-2.Solution.31.html">html</a></td>
+    <td><a href="data/solutions/xml/QMC-2.Solution.31.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- Ikegami-2Shift-DATA1.ros -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="Ikegami2" src="../images/Ikegami2_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/Ikegami-2Shift-DATA1.ros">Ikegami-2Shift-DATA1.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Ikegami">Ikegami</a>
+    <!-- <img alt="Flag of Japan" src="../images/Flag_of_Japan.png" style="border: 1px solid #000000;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">28</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">2</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">30 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per shift and by skill level. </td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">IKE03</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>0</b></td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-2Shift-DATA1.Solution.0.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-2Shift-DATA1.Solution.0.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="Ikegami3" src="../images/Ikegami3_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" style="border-bottom-width: 0px; border-right-width: 0px;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/Ikegami-3Shift-DATA1.ros">Ikegami-3Shift-DATA1.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Ikegami">Ikegami</a>
+    <!-- <img alt="Flag of Japan" src="../images/Flag_of_Japan.png" style="border: 1px solid #000000;"/>--></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">25</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">3</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">30 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per shift and by skill level. </td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">IKE03</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" style="border-bottom-width: 0px;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>2</b></td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-3Shift-DATA1.Solution.2.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-3Shift-DATA1.Solution.2.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">5</td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-3Shift-DATA1.Solution.5.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-3Shift-DATA1.Solution.5.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">6</td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-3Shift-DATA1.Solution.6.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-3Shift-DATA1.Solution.6.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;"></td>
+ <td colspan="1" class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="leftColA" valign="top">Other versions</td>
+    <td class="rightColA"><a href="data/Ikegami-3Shift-DATA1.1.ros">Ikegami-3Shift-DATA1.1.ros</a>
+    Some extra personal requests.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>3</b></td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-3Shift-DATA1.1.Solution.3.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-3Shift-DATA1.1.Solution.3.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">9</td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-3Shift-DATA1.1.Solution.9.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-3Shift-DATA1.1.Solution.9.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">13</td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-3Shift-DATA1.1.Solution.13.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-3Shift-DATA1.1.Solution.13.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;"></td>
+ <td colspan="1" class="dataCell" style="border-top-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="leftColA"> </td>
+    <td class="rightColA"><a href="data/Ikegami-3Shift-DATA1.2.ros">Ikegami-3Shift-DATA1.2.ros</a>
+    More requests.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" style="border-top-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>3</b></td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-3Shift-DATA1.2.Solution.3.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-3Shift-DATA1.2.Solution.3.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">11</td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-3Shift-DATA1.2.Solution.11.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-3Shift-DATA1.2.Solution.11.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">12</td>
+    <td class="lft1"><a href="data/solutions/html/Ikegami-3Shift-DATA1.2.Solution.12.html">html</a></td>
+    <td><a href="data/solutions/xml/Ikegami-3Shift-DATA1.2.Solution.12.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- Millar -->
+
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="Millar" src="../images/Millar_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" style="border-bottom-width: 0px; border-right-width: 0px;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/Millar-2Shift-DATA1.ros">Millar-2Shift-DATA1.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Millar">Millar</a>
+    <!-- <img alt="Flag of Japan" src="../images/Flag_of_Canada.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">8</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">2</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">14 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per shift. Over and under coverage is not allowed.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">IKE03</a>, <a href="bounds.html#references">MIL98</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" style="border-bottom-width: 0px;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>0</b></td>
+    <td class="lft1"><a href="data/solutions/html/Millar-2Shift-DATA1.Solution.0.html">html</a></td>
+    <td><a href="data/solutions/xml/Millar-2Shift-DATA1.Solution.0.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">0</td>
+    <td><a href="data/solutions/html/Millar-2Shift-DATA1.Solution.0_1.html">html</a></td>
+    <td><a href="data/solutions/xml/Millar-2Shift-DATA1.Solution.0_1.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;"></td>
+ <td colspan="1" class="dataCell" style="border-top-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="leftColA" valign="top">Other versions</td>
+    <td class="rightColA"><a href="data/Millar-2Shift-DATA1.1.ros">Millar-2Shift-DATA1.1.ros</a>
+    A simpler version with less constraints.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" style="border-top-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>0</b></td>
+    <td class="lft1"><a href="data/solutions/html/Millar-2Shift-DATA1.1.Solution.0.html">html</a></td>
+    <td><a href="data/solutions/xml/Millar-2Shift-DATA1.1.Solution.0.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- BCV -->
+
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="BCV3" src="../images/BCV3_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-bottom-width: 0px; border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/BCV-3.46.2.ros">BCV-3.46.2.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#ANROM">ANROM</a>
+    <!-- <img alt="Flag of Belgium" src="../images/Flag_of_Belgium.png" style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">46</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">3</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">26 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">BRU07</a>, <a href="bounds.html#references">BRU09</a>,
+    <a href="bounds.html#references">BUR07b</a>,
+    <a href="bounds.html#references">BUR07c</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top" style="border-bottom-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+  <tr>
+    <td class="penCell"><b>894</b></td>
+    <td class="lft1"><a href="data/solutions/html/BCV-3.46.2.Solution.894.html">html</a></td>
+    <td><a href="data/solutions/xml/BCV-3.46.2.Solution.894.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">895</td>
+    <td><a href="data/solutions/html/BCV-3.46.2.Solution.895.html">html</a></td>
+    <td><a href="data/solutions/xml/BCV-3.46.2.Solution.895.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">896</td>
+    <td><a href="data/solutions/html/BCV-3.46.2.Solution.896.html">html</a></td>
+    <td><a href="data/solutions/xml/BCV-3.46.2.Solution.896.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="BCV4" src="../images/BCV4_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/BCV-4.13.1.ros">BCV-4.13.1.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#ANROM">ANROM</a>
+    <!-- <img alt="Flag of Belgium" src="../images/Flag_of_Belgium.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">13</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">4</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">29 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">BRU07</a>, <a href="bounds.html#references">BRU09</a>,
+    <a href="bounds.html#references">BUR07b</a>,
+    <a href="bounds.html#references">BUR07c</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top" style="border-bottom-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>10</b></td>
+    <td class="lft1"><a href="data/solutions/html/BCV-4.13.1.Solution.10.html">html</a></td>
+    <td><a href="data/solutions/xml/BCV-4.13.1.Solution.10.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- Azaiez -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="Azaiez" src="../images/Azaiez_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/Azaiez.ros">Azaiez.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Azaiez">Azaiez</a>
+    <!-- <img alt="Flag of Saudi Arabia" src="../images/Flag_of_Saudi_Arabia.png" style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">13</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">2</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">28 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per shift and by skill level.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">AZA05</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>0</b></td>
+    <td class="lft1"><a href="data/solutions/html/Azaiez.Solution.0.html">html</a></td>
+    <td><a href="data/solutions/xml/Azaiez.Solution.0.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+
+<!-- Valouxis -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="Valouxis" src="../images/Valouxis1_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/Valouxis-1.ros">Valouxis-1.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Valouxis">Valouxis</a> 
+    <!-- <img alt="Flag of Greece" src="../images/Flag_of_Greece.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">16</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Schedule length</td>
+    <td class="rightColA">28 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">3</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">VAL00</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1">
+  <tr>
+    <td class="penCell"><b>20</b></td>
+    <td class="lft1"><a href="data/solutions/html/Valouxis-1.Solution.20.html">html</a></td>
+    <td><a href="data/solutions/xml/Valouxis-1.Solution.20.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">40</td>
+    <td><a href="data/solutions/html/Valouxis-1.Solution.40.html">html</a></td>
+    <td><a href="data/solutions/xml/Valouxis-1.Solution.40.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">60</td>
+    <td><a href="data/solutions/html/Valouxis-1.Solution.60.html">html</a></td>
+    <td><a href="data/solutions/xml/Valouxis-1.Solution.60.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">120</td>
+    <td><a href="data/solutions/html/Valouxis-1.Solution.120.html">html</a></td>
+    <td><a href="data/solutions/xml/Valouxis-1.Solution.120.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- HED01 -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><a class="anch" name="HED01"></a><img alt="HED01" src="../images/HED01_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/HED01.ros">HED01.ros</a>&nbsp;</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#HED">HED01</a> 
+    <!-- <img alt="Flag of Spain" src="../images/Flag_of_Spain.png" style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">20</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Schedule length</td>
+    <td class="rightColA">31 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">5</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per shift and includes skills.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Comments</td>
+    <td class="rightColA">(Uses the <i>Conditional</i> constraint).</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">PUE09</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1">
+  <tr>
+    <td class="penCell"><b>136</b></td>
+    <td class="lft1"><a href="data/solutions/html/HED01.Solution.136.html">html</a></td>
+    <td><a href="data/solutions/xml/HED01.Solution.136.roster">xml</a></td>
+   </tr>
+  <tr>
+    <td class="penCell">138</td>
+    <td class="lft1"><a href="data/solutions/html/HED01.Solution.138.html">html</a></td>
+    <td><a href="data/solutions/xml/HED01.Solution.138.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">140</td>
+    <td class="lft1"><a href="data/solutions/html/HED01.Solution.140.html">html</a></td>
+    <td><a href="data/solutions/xml/HED01.Solution.140.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+<tr>
+ <td class="dataCell" style="border-top-width: 0px; border-bottom-width: 0px; border-top-style: hidden;"></td>
+ <td colspan="1" class="dataCell" style="border-top-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1" border="0">
+   <tr>
+    <td class="leftColA" valign="top">Other versions</td>
+    <td class="rightColA"><a href="data/HED01b.ros">HED01b.ros</a>
+    A modified version used in <a href="bounds.html#SOL13">SOL13</a>.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" style="border-top-width: 0px; border-top-style: hidden;" valign="top">
+  <table cellpadding="0" cellspacing="1">
+  <tr>
+    <td class="penCell"><b>83</b></td>
+    <td class="lft1"></td>
+    <td></td>
+   </tr>
+   <tr>
+    <td class="penCell">129</td>
+    <td class="lft1"><a href="data/solutions/html/HED01b.Solution.129.html">html</a></td>
+    <td><a href="data/solutions/xml/HED01b.Solution.129.roster">xml</a></td>
+   </tr>
+  </table>
+ </td> 
+</tr>
+
+<!-- BCDT-Sep -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><a class="anch" name="BCDT-Sep"></a><img alt="BCDT-Sep" src="../images/BCDT-Sep_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/BCDT-Sep.ros">BCDT-Sep.ros</a>&nbsp;</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#BCDT">BCDT</a> 
+    <!-- <img alt="Flag of Italy" src="../images/Flag_of_Italy.png" style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">20</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Schedule length</td>
+    <td class="rightColA">30 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">4</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per shift.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">BEL04</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>100</b></td>
+    <td class="lft1"><a href="data/solutions/html/BCDT-Sep.Solution.100.html">html</a></td>
+    <td><a href="data/solutions/xml/BCDT-Sep.Solution.100.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">140</td>
+    <td class="lft1"><a href="data/solutions/html/BCDT-Sep.Solution.140.html">html</a></td>
+    <td><a href="data/solutions/xml/BCDT-Sep.Solution.140.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">160</td>
+    <td class="lft1"><a href="data/solutions/html/BCDT-Sep.Solution.160.html">html</a></td>
+    <td><a href="data/solutions/xml/BCDT-Sep.Solution.160.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- WHPP -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="WHPP" src="../images/WHPP_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/WHPP.ros">WHPP.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#WHPP">WHPP</a> 
+    <!-- <img alt="Flag of France" src="../images/Flag_of_France.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">30</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Schedule length</td>
+    <td class="rightColA">2 weeks</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">3</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">WEI95</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>5</b></td>
+    <td class="lft1"><a href="data/solutions/html/WHPP.Solution.5.html">html</a></td>
+    <td><a href="data/solutions/xml/WHPP.Solution.5.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- LLR -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="LLR" src="../images/LLR_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/LLR.ros">LLR.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#LLR">LLR</a> 
+    <!-- <img alt="Flag of Hong Kong" src="../images/Flag_of_Hong_Kong.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">27</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Schedule length</td>
+    <td class="rightColA">7 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">3</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">LI03</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>301</b></td>
+    <td class="lft1"><a href="data/solutions/html/LLR.Solution.301.html">html</a></td>
+    <td><a href="data/solutions/xml/LLR.Solution.301.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">366</td>
+    <td><a href="data/solutions/html/LLR.Solution.366.html">html</a></td>
+    <td><a href="data/solutions/xml/LLR.Solution.366.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- Musa -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="Musa" src="../images/Musa_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/Musa.ros">Musa.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Musa">Musa</a> 
+    <!-- <img alt="Flag of USA" src="../images/Flag_of_the_United_States.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Comments</td>
+    <td class="rightColA">This instance is taken from a fairly early publication on nurse rostering. A UNIVAC 1100 was used to solve it in 1982!</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">11</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Schedule length</td>
+    <td class="rightColA">14 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">1</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift, minimum and preferred levels are used.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">MUS84</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>175</b></td>
+    <td class="lft1"><a href="data/solutions/html/Musa.Solution.175.html">html</a></td>
+    <td><a href="data/solutions/xml/Musa.Solution.175.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">199</td>
+    <td><a href="data/solutions/html/Musa.Solution.199.html">html</a></td>
+    <td><a href="data/solutions/xml/Musa.Solution.199.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr> 
+
+<!-- Ozkarahan -->
+<tr>
+ <td valign="top" class="dataCell" style="padding-top:10px; text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="Ozkarahan" src="../images/Ozkarahan_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top" style="border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/Ozkarahan.ros">Ozkarahan.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Ozkarahan">Ozkarahan</a> 
+    <!-- <img alt="Flag of USA" src="../images/Flag_of_the_United_States.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">14</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Schedule length</td>
+    <td class="rightColA">7 days</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">2</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is specified per shift.</td>
+   </tr>
+   <tr>
+    <td class="leftColA">References</td>
+    <td class="rightColA">[<a href="bounds.html#references">OZK89</a>]</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top">
+  <table cellpadding="0" cellspacing="1">
+  <tr>
+    <td class="penCell"><b>0</b></td>
+    <td class="lft1"><a href="data/solutions/html/Ozkarahan.Solution.0.html">html</a></td>
+    <td><a href="data/solutions/xml/Ozkarahan.Solution.0.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<!-- Montreal data sets -->
+
+<tr>
+ <td class="dataCell" style="text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="MER" src="../images/MER_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top"  style="border-bottom-width: 0px; border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/MER.ros">MER.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Montreal">Montreal</a>
+    <!-- <img alt="Flag of Canada" src="../images/Flag_of_Canada.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">54</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">12</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">6 weeks</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per time period of the day.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top" style="border-bottom-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+    <tr>
+    <td class="penCell">7080</td>
+    <td class="lft1"></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td class="penCell">7081</td>
+    <td class="lft1"><a href="data/solutions/html/MER.Solution.7081.html">html</a></td>
+    <td><a href="data/solutions/xml/MER.Solution.7081.roster">xml</a></td>
+  </tr>
+  <tr>
+    <td class="penCell">7213</td>
+    <td class="lft1"><a href="data/solutions/html/MER.Solution.7213.html">html</a></td>
+    <td><a href="data/solutions/xml/MER.Solution.7213.roster">xml</a></td>
+  </tr>
+  <tr>
+    <td class="penCell">7248</td>
+    <td class="lft1"><a href="data/solutions/html/MER.Solution.7248.html">html</a></td>
+    <td><a href="data/solutions/xml/MER.Solution.7248.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="text-align:center; border-bottom-width: 0px; border-left-width: 1px;"><img alt="CHILD" src="../images/CHILD_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top"  style="border-bottom-width: 0px; border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/CHILD.ros">CHILD.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Montreal">Montreal</a>
+    <!-- <img alt="Flag of Canada" src="../images/Flag_of_Canada.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">41</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">5</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">6 weeks</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per time period of the day.</td>
+   </tr>
+  </table>
+ </td>
+ 
+ <td class="dataCell" valign="top" style="border-bottom-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+  <tr>
+    <td class="penCell"><b>149</b></td>
+    <td class="lft1"><a href="data/solutions/html/CHILD.Solution.149.html">html</a></td>
+    <td><a href="data/solutions/xml/CHILD.Solution.149.roster">xml</a></td>
+   </tr>
+  <tr>
+    <td class="penCell">154</td>
+    <td class="lft1"><a href="data/solutions/html/CHILD.Solution.154.html">html</a></td>
+    <td><a href="data/solutions/xml/CHILD.Solution.154.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">155</td>
+    <td class="lft1"><a href="data/solutions/html/CHILD.Solution.155.html">html</a></td>
+    <td><a href="data/solutions/xml/CHILD.Solution.155.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="text-align:center; border-bottom-width: 1px; border-left-width: 1px;"><img alt="ERRVH" src="../images/ERRVH_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top"  style="border-bottom-width: 1px; border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/ERRVH.ros">ERRVH.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Montreal">Montreal</a>
+    <!-- <img alt="Flag of Canada" src="../images/Flag_of_Canada.png"  style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">51</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">8</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">6 weeks</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per time period of the day.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top" style="border-bottom-width: 1px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>2001</b></td>
+    <td class="lft1"><a href="data/solutions/html/ERRVH.Solution.2001.html">html</a></td>
+    <td><a href="data/solutions/xml/ERRVH.Solution.2001.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">2021</td>
+    <td class="lft1"><a href="data/solutions/html/ERRVH.Solution.2021.html">html</a></td>
+    <td><a href="data/solutions/xml/ERRVH.Solution.2021.roster">xml</a></td>
+   </tr>
+   <tr>
+    <td class="penCell">2080</td>
+    <td class="lft1"><a href="data/solutions/html/ERRVH.Solution.2080.html">html</a></td>
+    <td><a href="data/solutions/xml/ERRVH.Solution.2080.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+
+<tr>
+ <td class="dataCell" style="text-align:center; border-bottom-width: 1px; border-left-width: 1px;"><img alt="ERMGH" src="../images/ERMGH_small.png" style="border-width:0px;"/></td>
+ <td class="dataCell" valign="top"  style="border-bottom-width: 1px; border-right-width: 0px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="leftColA">File</td>
+    <td class="rightColA"><a href="data/ERMGH.ros">ERMGH.ros</a></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Problem</td>
+    <td class="rightColA"><a href="bounds.html#Montreal">Montreal</a>
+    <!-- <img alt="Flag of Canada" src="../images/Flag_of_Canada.png" style="border-width:0px;"/> --></td>
+   </tr>
+   <tr>
+    <td class="leftColA">Employees</td>
+    <td class="rightColA">41</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Shift types</td>
+    <td class="rightColA">4</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Period</td>
+    <td class="rightColA">6 weeks</td>
+   </tr>
+   <tr>
+    <td class="leftColA">Cover type</td>
+    <td class="rightColA">Cover is per time period of the day.</td>
+   </tr>
+  </table>
+ </td>
+ <td class="dataCell" valign="top" style="border-bottom-width: 1px;">
+  <table cellpadding="0" cellspacing="1">
+   <tr>
+    <td class="penCell"><b>779</b></td>
+    <td class="lft1"><a href="data/solutions/html/ERMGH.Solution.779.html">html</a></td>
+    <td><a href="data/solutions/xml/ERMGH.Solution.779.roster">xml</a></td>
+   </tr>
+  </table>
+ </td>
+</tr>
+</table>
+</div>
+<div style="text-align:right">(<b>bold</b> denotes proven optimal solution)</div>
+
+
+
+
+
+<p class="sideHeader">References</p>
+
+ <ul style="margin-top: 4px; margin-bottom: 10px; list-style-type:circle;">
+   <li>Asta, S., Özcan, E., and Curtois, T. 
+       A tensor based hyper-heuristic for nurse rostering. 
+       Knowledge-based systems, 2016. 98: p. 185-199.
+  </li>
+  <li>Burke E.K. and T. Curtois.
+   New Approaches to Nurse Rostering Benchmark Instances. 
+   European Journal of Operational Research, 2014. 237(1): p. 71-81.
+   <a href="../papers/new_approaches_to_nurse_rostering_benchmark_instances.pdf">pdf</a>.
+  </li>
+  <li>Solos, Ioannis P., Ioannis X. Tassopoulos and Grigorios N. Beligiannis. 
+    A Generic Two-Phase Stochastic Variable Neighborhood Approach for Effectively Solving the Nurse Rostering Problem. 
+    Algorithms, 2013. 6: p. 278-308.
+  </li>
+  
+ </ul>
+
+ <br/>
+
+ <div style="text-align: justify;">
+
+
+    <p class="sideHeader" style="margin-top : 0px; margin-bottom: 4px;">See also</p>
+    <ul style="margin-top : 0px; margin-bottom: 14px; list-style-type:none;">
+    <li>- A spreadsheet of published <a href="data/NRP_Results.xls">results</a> and papers under review.</li>
+    <li>- Lower <a href="bounds.html">bounds</a>.</li>
+    <li>- A formal description and <a href="../papers/ANROM.pdf">model</a> for the BCV instances 
+    (a zip file containing all the BCV instances is available <a href="data/BCV_Instances.zip">here</a>).</li>
+    <li>- The instances in the format used by HyFlex in the Cross-domain Heuristic Search Challenge are available 
+    <a href="data/hyflex_instances.zip">here</a>.</li>
+    </ul>
+  </div>
+
+
+
+<p style="margin-top: 100px; margin-bottom: 8px;"> </p>
+													
+													
+													
+	
+
+								
+								</div>
+
+				</div>
+				</div>
+		
+</div>
+</body>
+</html>

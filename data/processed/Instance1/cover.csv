@@ -1,0 +1,15 @@
+Day,Weekday,Shift,Min nurses,Min weight (understaffing),Max nurses,Max weight (overstaffing)
+0,Mon,D,5,100,5,1
+1,Tue,D,7,100,7,1
+2,Wed,D,6,100,6,1
+3,Thu,D,4,100,4,1
+4,Fri,D,5,100,5,1
+5,Sat,D,5,100,5,1
+6,Sun,D,5,100,5,1
+7,Mon,D,6,100,6,1
+8,Tue,D,7,100,7,1
+9,Wed,D,4,100,4,1
+10,Thu,D,2,100,2,1
+11,Fri,D,5,100,5,1
+12,Sat,D,6,100,6,1
+13,Sun,D,4,100,4,1
