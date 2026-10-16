@@ -1,21 +1,15 @@
 """
-app.py - Streamlit application for the Nurse Rostering OR Project.
+app.py - Hospital Nurse Rostering Command Cockpit.
+Operations Research Decision-Support System (Integer Programming & Goal Programming).
 
 Run with:   streamlit run app.py
 
-Pages (sidebar):
-  1. Dataset        - load an NRP XML file (upload or bundled sample), see how it was parsed
-  2. Statistics     - on-demand descriptive statistics and charts of the raw data
-  3. Model          - the two optimisation models written out (variables, constraints, objectives)
-  4. Optimization   - run Integer Programming and/or Goal Programming (or load a saved verified run)
-  5. Results        - status, objective, coverage, day-wise / shift-wise staffing, requests, workload
-  6. Visualizations - charts of the solutions
-  7. Comparison     - IP vs GP, component by component
-  8. Roster         - coloured nurse x day roster and CSV downloads
-
-Solvers are only called from explicit button clicks, never on a Streamlit re-run. Every number
-shown for a solution is either produced by the solver or recomputed from the roster; nothing is
-hard-coded.
+5 Integrated Cockpit Modules:
+  1. 🏥 Ward Ingestion & Setup       - Ingest NRP XML instances, schema validation, ward capacity health
+  2. 📊 Staffing Analytics           - On-demand exploratory demand analytics, heatmaps & nurse limits
+  3. ⚙️ Optimization Cockpit          - Dual solver engines (IP & GP) + mathematical engine specifications
+  4. 📅 Master Schedule & Results    - Unified results scorecard, clinical audits, color-coded shift roster & CSVs
+  5. ⚖️ Executive Comparison         - Head-to-head decision scoreboard (Coverage vs Workload Equity)
 """
 
 import inspect
@@ -63,7 +57,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Pakka Modern Hospital Cockpit Design System & Styling
+# Hospital Operations Cockpit Design System
 # ─────────────────────────────────────────────────────────────────────────────
 COCKPIT_CSS = """
 <style>
@@ -76,15 +70,14 @@ code, pre {
     font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* Page container */
 .block-container {
     padding-top: 1.4rem !important;
     padding-bottom: 3.5rem !important;
     max-width: 1440px !important;
 }
 
-/* Hospital Cockpit Command Banner */
-.hospital-banner {
+/* Command Header */
+.cockpit-banner {
     background: linear-gradient(135deg, #091322 0%, #0f1f38 55%, #172554 100%);
     border: 1px solid rgba(59, 130, 246, 0.3);
     border-radius: 16px;
@@ -92,14 +85,14 @@ code, pre {
     margin-bottom: 22px;
     box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
-.hospital-badge-row {
+.cockpit-badge-row {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 8px;
     flex-wrap: wrap;
 }
-.hospital-dept-badge {
+.dept-pill {
     background: rgba(37, 99, 235, 0.25);
     border: 1px solid rgba(96, 165, 250, 0.45);
     color: #93c5fd;
@@ -110,7 +103,7 @@ code, pre {
     padding: 4px 11px;
     border-radius: 6px;
 }
-.hospital-status-pulse {
+.status-pill {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -122,21 +115,21 @@ code, pre {
     padding: 4px 11px;
     border-radius: 6px;
 }
-.pulse-dot {
+.pulse-circle {
     width: 7px;
     height: 7px;
     background: #10b981;
     border-radius: 50%;
     box-shadow: 0 0 8px #10b981;
 }
-.cockpit-title {
+.cockpit-title-text {
     font-size: 1.8rem;
     font-weight: 800;
     color: #ffffff !important;
     letter-spacing: -0.025em;
     margin: 0;
 }
-.cockpit-desc {
+.cockpit-subtitle-text {
     font-size: 0.93rem;
     color: #94a3b8;
     margin: 6px 0 0 0;
@@ -168,41 +161,6 @@ div[data-testid="stMetricValue"] div {
     color: #f8fafc !important;
     font-size: 1.7rem !important;
     font-weight: 800 !important;
-}
-
-/* Constraint Cards Grid */
-.constraint-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 12px;
-    margin: 16px 0 24px 0;
-}
-.constraint-box {
-    background: rgba(30, 41, 59, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 14px 16px;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-}
-.constraint-box:hover {
-    border-color: #38bdf8;
-    transform: translateY(-2px);
-    background: rgba(30, 41, 59, 0.8);
-}
-.constraint-header {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: #38bdf8;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.constraint-body {
-    font-size: 0.82rem;
-    color: #cbd5e1;
-    line-height: 1.45;
-    margin: 0;
 }
 
 /* Sidebar Overhaul */
@@ -239,13 +197,6 @@ section[data-testid="stSidebar"] hr {
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
-.cockpit-session-box {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin: 12px 0;
-}
 
 /* Tabs */
 button[data-baseweb="tab"] {
@@ -273,19 +224,6 @@ button[kind="primary"] {
 button[kind="primary"]:hover {
     transform: translateY(-1px) !important;
     box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5) !important;
-}
-
-/* Secondary Button */
-button[kind="secondary"] {
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 8px !important;
-    font-weight: 500 !important;
-    transition: all 0.2s ease !important;
-}
-button[kind="secondary"]:hover {
-    border-color: #38bdf8 !important;
-    color: #38bdf8 !important;
-    background: rgba(56, 189, 248, 0.08) !important;
 }
 
 /* Shift Color Legend */
@@ -332,6 +270,32 @@ button[kind="secondary"]:hover {
     align-items: center;
     gap: 8px;
 }
+
+/* Constraint Cards Grid */
+.constraint-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+    margin: 16px 0 24px 0;
+}
+.constraint-box {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 14px 16px;
+}
+.constraint-header {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #38bdf8;
+    margin-bottom: 4px;
+}
+.constraint-body {
+    font-size: 0.82rem;
+    color: #cbd5e1;
+    line-height: 1.45;
+    margin: 0;
+}
 </style>
 """
 st.markdown(COCKPIT_CSS, unsafe_allow_html=True)
@@ -339,13 +303,13 @@ st.markdown(COCKPIT_CSS, unsafe_allow_html=True)
 
 def _cockpit_header(title: str, subtitle: str, dept: str = "INPATIENT NURSING WARD", status: str = "SYSTEM ACTIVE"):
     st.markdown(f"""
-    <div class="hospital-banner">
-        <div class="hospital-badge-row">
-            <span class="hospital-dept-badge">🏥 {dept}</span>
-            <span class="hospital-status-pulse"><span class="pulse-dot"></span> {status}</span>
+    <div class="cockpit-banner">
+        <div class="cockpit-badge-row">
+            <span class="dept-pill">🏥 {dept}</span>
+            <span class="status-pill"><span class="pulse-circle"></span> {status}</span>
         </div>
-        <h1 class="cockpit-title">{title}</h1>
-        <p class="cockpit-desc">{subtitle}</p>
+        <h1 class="cockpit-title-text">{title}</h1>
+        <p class="cockpit-subtitle-text">{subtitle}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -375,7 +339,6 @@ def _set_dataset(ds, xml_bytes, label):
 
 
 def _parse_from_bytes(xml_bytes: bytes, label: str):
-    """Write the bytes to a temp file and parse. Returns (dataset, error_str)."""
     with tempfile.NamedTemporaryFile(suffix=".xml", delete=False) as f:
         f.write(xml_bytes)
         tmp_path = f.name
@@ -430,7 +393,6 @@ def _tables_zip(ds) -> bytes:
 
 
 def _fmt_value(v):
-    """Whole numbers without decimals, other numbers with at most 2; strings untouched."""
     if isinstance(v, bool) or v is None:
         return "" if v is None else str(v)
     if isinstance(v, (int, float)):
@@ -441,7 +403,6 @@ def _fmt_value(v):
 
 
 def _fmt_table(df: pd.DataFrame) -> pd.DataFrame:
-    """Format the value columns of a comparison table (every column except 'Metric')."""
     out = df.copy()
     for col in out.columns:
         if col != "Metric":
@@ -450,22 +411,27 @@ def _fmt_table(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _need_dataset():
-    st.warning("Load a dataset first (📁 Dataset page).")
+    st.warning("Load a dataset first (🏥 Ward Ingestion & Setup page).")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Sidebar Cockpit Navigation
+# Sidebar Cockpit Navigation: 5 Integrated Modules
 # ─────────────────────────────────────────────────────────────────────────────
 
-PAGES = ["📁 Dataset", "📊 Statistics", "📘 Model", "⚙️ Optimization", "📈 Results",
-         "🖼️ Visualizations", "⚖️ Comparison", "📅 Roster"]
+PAGES = [
+    "🏥 Ward Ingestion & Setup",
+    "📊 Staffing Analytics",
+    "⚙️ Optimization Cockpit",
+    "📅 Master Schedule & Results",
+    "⚖️ Executive Comparison",
+]
 
 st.sidebar.markdown("""
 <div class="sidebar-logo">
     <span class="sidebar-logo-icon">🏥</span>
     <div>
         <div class="sidebar-logo-text">Nurse Rostering</div>
-        <div class="sidebar-logo-sub">Operations Research System</div>
+        <div class="sidebar-logo-sub">Hospital Decision Cockpit</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -475,7 +441,6 @@ section = st.sidebar.radio("Navigation", PAGES, key="nav")
 
 
 def _render_session_status():
-    """Sidebar status block. Called at the very END of the script so it reflects what the page just did."""
     st.sidebar.markdown("---")
     st.sidebar.markdown("**Session status**")
     ds_now = st.session_state["dataset"]
@@ -489,17 +454,16 @@ def _render_session_status():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 1. DATASET
+# 1. WARD INGESTION & SETUP
 # ─────────────────────────────────────────────────────────────────────────────
 
-if section == "📁 Dataset":
+if section == "🏥 Ward Ingestion & Setup":
     _cockpit_header(
-        title="Ward Ingestion & Instance Management",
-        subtitle="Ingest and parse Nurse Rostering Benchmark XML instances into relational ward entities, contractual bounds, and shift demand requirements.",
+        title="Ward Ingestion & Setup",
+        subtitle="Ingest and parse Nurse Rostering Benchmark XML instances into relational entities, contracts, and shift demand requirements.",
         dept="ST. JUDE GENERAL HOSPITAL · WARD SCHEDULING",
         status="STANDBY / READY" if st.session_state["dataset"] is None else "DATASET MOUNTED",
     )
-    st.title("Dataset")
     st.markdown(
         "Load a **Nurse Rostering Benchmark** instance in the standard NRP XML format "
         "([schedulingbenchmarks.org/nrp](https://www.schedulingbenchmarks.org/nrp/)). "
@@ -581,17 +545,16 @@ if section == "📁 Dataset":
                            file_name="nurse_dataset_tables.zip", mime="application/zip")
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 2. STATISTICS (on demand)
+# 2. STAFFING ANALYTICS
 # ─────────────────────────────────────────────────────────────────────────────
 
-elif section == "📊 Statistics":
+elif section == "📊 Staffing Analytics":
     _cockpit_header(
-        title="Ward Resource & Demand Analytics",
+        title="Ward Staffing & Demand Analytics",
         subtitle="Comprehensive exploratory analysis of staffing requirements, nurse contractual capacities, and shift preferences.",
         dept="CLINICAL ANALYTICS DIVISION",
         status="ANALYTICS ENGINE ONLINE",
     )
-    st.title("Dataset statistics")
     dataset = st.session_state["dataset"]
     if dataset is None:
         _need_dataset()
@@ -657,409 +620,286 @@ elif section == "📊 Statistics":
                                file_name="nurse_dataset_tables.zip", mime="application/zip", key="zip2")
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 3. MODEL FORMULATION
+# 3. OPTIMIZATION COCKPIT & MATHEMATICAL SPECIFICATIONS
 # ─────────────────────────────────────────────────────────────────────────────
 
-elif section == "📘 Model":
+elif section == "⚙️ Optimization Cockpit":
     _cockpit_header(
-        title="Mathematical Optimization Architecture",
-        subtitle="Mathematical formulation of Integer Linear Programming and Multicriteria Goal Programming under unified clinical constraints.",
-        dept="OPERATIONS RESEARCH LABORATORY",
-        status="MODELS COMPILED",
-    )
-    st.title("The two optimisation models")
-    st.markdown(
-        "Both models share the same **binary roster variables** and the same **hard constraints**; they "
-        "differ in how the soft requirements are turned into an objective. The Integer Programming model "
-        "is the benchmark's own objective; the Goal Programming model rewrites the soft requirements as "
-        "goals with deviation variables and adds a workload-fairness goal."
-    )
-
-    st.header("Sets, data and decision variables")
-    st.markdown(
-        "Nurses $n\\in N$, days $d\\in D$, shifts $s\\in S$, weekends $w\\in W$. Data (all read from the XML): "
-        "$R^{min}_{d,s}, R^{max}_{d,s}$ (cover), $c^{min}_{d,s}, c^{max}_{d,s}$ (their penalty weights), "
-        "$a_i, b_i$ (weights of ShiftOn / ShiftOff request $i$), $L_s$ (shift duration), per-nurse contract "
-        "limits."
-    )
-    st.latex(r"x_{n,d,s}\in\{0,1\}\ \text{(nurse } n \text{ works shift } s \text{ on day } d),\quad "
-             r"y_{n,d}=\sum_s x_{n,d,s},\quad z_{n,w}\in\{0,1\}\ \text{(works weekend } w)")
-
-    st.header("Hard constraints (identical in both models)")
-    
-    st.markdown("""
-    <div class="constraint-grid">
-        <div class="constraint-box">
-            <div class="constraint-header">🩺 1. Single Shift Per Day</div>
-            <p class="constraint-body">A nurse may work at most one shift per calendar day: $\\sum_s x_{n,d,s} = y_{n,d} \\le 1$.</p>
-        </div>
-        <div class="constraint-box">
-            <div class="constraint-header">🚫 2. Contractual Shift Eligibility</div>
-            <p class="constraint-body">Forbidden shifts for nurse $n$ are strictly locked to zero: $x_{n,d,s} = 0$.</p>
-        </div>
-        <div class="constraint-box">
-            <div class="constraint-header">🏖️ 3. Fixed Mandatory Days Off</div>
-            <p class="constraint-body">Pre-approved fixed leaves force zero assignments: $y_{n,d} = 0$.</p>
-        </div>
-        <div class="constraint-box">
-            <div class="constraint-header">⏱️ 4. Workload Bounds</div>
-            <p class="constraint-body">Total worked minutes bounded by contract: $\\text{MinWL}_n \\le \\sum L_s x_{n,d,s} \\le \\text{MaxWL}_n$.</p>
-        </div>
-        <div class="constraint-box">
-            <div class="constraint-header">📊 5. Maximum Shift Quotas</div>
-            <p class="constraint-body">Shift type frequency limits per nurse: $\\sum_d x_{n,d,s} \\le \\text{MaxTot}_{n,s}$.</p>
-        </div>
-        <div class="constraint-box">
-            <div class="constraint-header">🌙 6. Minimum 840-Min Rest</div>
-            <p class="constraint-body">Rest between shifts $\\ge 840$ min; forbids Late→Early, Late→Day, and Day→Early next day.</p>
-        </div>
-        <div class="constraint-box">
-            <div class="constraint-header">📅 7. Max Consecutive Working Days</div>
-            <p class="constraint-body">Prevents burnout: $\\sum_{k=0}^{M} y_{n,d+k} \\le M$ across every sliding window of $M+1$ days.</p>
-        </div>
-        <div class="constraint-box">
-            <div class="constraint-header">🔁 8. Min Consecutive Work / Rest</div>
-            <p class="constraint-body">Blocks starting inside the horizon must meet minimum duration rules (boundary exempt).</p>
-        </div>
-        <div class="constraint-box">
-            <div class="constraint-header">📆 9. Working Weekend Cap</div>
-            <p class="constraint-body">Working Saturday or Sunday activates weekend flag $z_{n,w}$; total weekends capped.</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(
-        "1. **One shift per day** - $\\sum_s x_{n,d,s}=y_{n,d}\\le 1$.\n"
-        "2. **Valid shifts** - $x_{n,d,s}=0$ if $s$ is not allowed by the nurse's contracts.\n"
-        "3. **Fixed assignments** - $y_{n,d}=0$ on the fixed days off.\n"
-        "4. **Workload bounds** - $\\text{MinWL}_n\\le\\sum_{d,s}L_s\\,x_{n,d,s}\\le\\text{MaxWL}_n$.\n"
-        "5. **Maximum shifts of a type** - $\\sum_d x_{n,d,s}\\le \\text{MaxTot}_{n,s}$.\n"
-        "6. **Minimum rest** (840 min) - forbidden successions derived from start time + duration "
-        "(Late→Early, Late→Day, Day→Early in Instance 3): $x_{n,d,s_1}+x_{n,d+1,s_2}\\le 1$.\n"
-        "7. **Maximum consecutive working days** - $\\sum_{k=0}^{M}y_{n,d+k}\\le M$ for every window of $M+1$ days.\n"
-        "8. **Minimum consecutive working days / days off** - a block that starts inside the horizon must "
-        "last at least the minimum (blocks touching the horizon boundary are exempt).\n"
-        "9. **Weekends** - $z_{n,w}\\ge y_{n,\\text{Sat}},\\ z_{n,w}\\ge y_{n,\\text{Sun}},\\ "
-        "z_{n,w}\\le y_{n,\\text{Sat}}+y_{n,\\text{Sun}}$ and $\\sum_w z_{n,w}\\le \\text{MaxWeekends}_n$."
-    )
-
-    col_m1, col_m2 = st.columns(2)
-    with col_m1:
-        with st.container(border=True):
-            st.header("Model 1 - Integer Programming (benchmark objective)")
-            st.latex(r"\min Z_{IP}=\sum_{d,s}c^{min}_{d,s}\,u_{d,s}+\sum_{d,s}c^{max}_{d,s}\,o_{d,s}"
-                     r"+\sum_i a_i\,v^{on}_i+\sum_i b_i\,v^{off}_i")
-            st.latex(r"\sum_n x_{n,d,s}+u_{d,s}\ge R^{min}_{d,s},\qquad \sum_n x_{n,d,s}-o_{d,s}\le R^{max}_{d,s},"
-                     r"\qquad x_{n,d,s}+v^{on}_i\ge 1,\qquad x_{n,d,s}-v^{off}_i\le 0")
-            st.markdown("$u,o\\ge 0$ integer (under-/over-staffing), $v^{on}_i,v^{off}_i\\in\\{0,1\\}$ (request violated). "
-                        "For Instance 3 the published optimum of this objective is **1001**.")
-
-    with col_m2:
-        with st.container(border=True):
-            st.header("Model 2 - Goal Programming (weighted deviations)")
-            st.latex(r"\text{G1: }\sum_n x_{n,d,s}+d^-_{d,s}-d^+_{d,s}=R^{min}_{d,s}\qquad "
-                     r"\text{G3: }\sum_{d,s}L_s\,x_{n,d,s}+wp^-_n-wp^+_n=T_n,\quad T_n=\tfrac{\text{MinWL}_n+\text{MaxWL}_n}{2}")
-            st.latex(r"\text{G2: }x_{n,d,s}+v^{on}_i\ge 1,\qquad x_{n,d,s}-v^{off}_i\le 0")
-            st.latex(r"\min Z_{GP}=w_1\!\sum c^{min}_{d,s}d^-_{d,s}+w_3\!\sum c^{max}_{d,s}d^+_{d,s}"
-                     r"+w_2\!\Big(\sum a_i v^{on}_i+\sum b_i v^{off}_i\Big)+w_4\sum_n\big(wp^+_n+wp^-_n\big)")
-            st.table(pd.DataFrame({
-                "Weight": ["w1", "w2", "w3", "w4"],
-                "Goal": ["Understaffing", "Request violations", "Overstaffing", "Workload deviation (minutes)"],
-                "Default": [DEFAULT_GP_WEIGHTS["w1"], DEFAULT_GP_WEIGHTS["w2"], DEFAULT_GP_WEIGHTS["w3"],
-                            DEFAULT_GP_WEIGHTS["w4"]],
-            }))
-
-    st.warning(
-        "**Reading the weights:** w4 converts *minutes* into penalty units. At w4 = 0.5, one 8-hour shift of "
-        "deviation from the target costs 240 units, more than one unfilled nurse-slot (100). Fairness is "
-        "therefore weighted *above* a single unit of coverage, and the GP leaves extra slots unfilled to stay "
-        "near the targets. With w4 = 0 the GP objective reduces to the IP objective (Instance 3). "
-        "See `docs/GOAL_PROGRAMMING.md` for the sensitivity table."
-    )
-    st.markdown("The two objectives are **not comparable as raw numbers** - the GP contains a term the "
-                "benchmark does not have. They are compared component by component (coverage, requests, workload).")
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 4. OPTIMIZATION
-# ─────────────────────────────────────────────────────────────────────────────
-
-elif section == "⚙️ Optimization":
-    _cockpit_header(
-        title="Optimization Execution Cockpit",
-        subtitle="Control branch-and-cut solver engines for Integer Programming and Multicriteria Goal Programming, or mount pre-verified benchmark runs.",
+        title="Optimization Engine Cockpit",
+        subtitle="Configure and execute branch-and-cut solver routines for Integer Programming and Multicriteria Goal Programming, or inspect formal mathematical engine specs.",
         dept="DECISION ENGINE CONTROL CENTER",
         status="SOLVERS STANDBY",
     )
-    st.title("Optimization")
-    dataset = st.session_state["dataset"]
-    if dataset is None:
-        _need_dataset()
-    else:
+    opt_tab1, opt_tab2 = st.tabs(["⚡ Solver Execution Consoles", "📐 Mathematical Engine Specifications"])
+
+    with opt_tab1:
+        dataset = st.session_state["dataset"]
+        if dataset is None:
+            _need_dataset()
+        else:
+            st.markdown(
+                "Choose an optimization engine and click **Run**. Solvers use CBC (COIN-OR) through PuLP, single-threaded. "
+                "Instance 3 takes roughly **2-3 minutes** for the IP to *prove* optimality and under a minute for "
+                "the GP; Instances 1-2 take a second or two. If the time limit is reached first, the result is "
+                "shown as **feasible, not proven optimal**."
+            )
+            info = benchmark_info(dataset)
+            if info and (has_reference(dataset, "ip") or has_reference(dataset, "gp")):
+                st.caption("⚡ A saved, verified reference solution exists for this instance - use the "
+                           "'Load saved reference' buttons to skip the waiting time (e.g. for a live demo).")
+
+            col_ip, col_gp = st.columns(2)
+
+            # ── IP Console ────────────────────────────────────────────────────
+            with col_ip:
+                with st.container(border=True):
+                    st.subheader("Integer Programming (IP)")
+                    st.markdown("Minimises the **benchmark objective**:  \n"
+                                "Σ (min-weight × understaffing) + Σ (max-weight × overstaffing) + Σ (request weight × violation)")
+                    time_limit_ip = st.slider("IP time limit (seconds)", 10, 900, 300, step=10, key="ip_tl")
+                    if st.button("▶ Run Integer Programming", key="run_ip", type="primary"):
+                        with st.spinner(f"Solving IP (time limit: {time_limit_ip}s) …"):
+                            result = solve_integer_program(dataset, time_limit=time_limit_ip)
+                            val = validate_solution(dataset, result.assignments)
+                        st.session_state["ip_result"], st.session_state["val_ip"] = result, val
+                        st.session_state["comparison"] = None
+
+                    if has_reference(dataset, "ip"):
+                        prov = reference_provenance(dataset, "ip") or {}
+                        if st.button("⚡ Load saved reference solution (IP)", key="load_ip"):
+                            try:
+                                result = load_reference(dataset, "ip")
+                                st.session_state["ip_result"] = result
+                                st.session_state["val_ip"] = validate_solution(dataset, result.assignments)
+                                st.session_state["comparison"] = None
+                            except ReferenceSolutionError as e:
+                                st.error(str(e))
+                        st.caption(f"Saved run: {prov.get('status')}, objective {prov.get('objective'):g}, "
+                                   f"{prov.get('solve_time_s')} s, {(prov.get('solver') or {}).get('library', '')}.")
+                    r = st.session_state["ip_result"]
+                    if r is not None:
+                        _status_banner(r)
+                        st.write(f"Objective: **{r.objective_value}**")
+
+            # ── GP Console ────────────────────────────────────────────────────
+            with col_gp:
+                with st.container(border=True):
+                    st.subheader("Goal Programming (GP)")
+                    st.markdown("Minimises a **weighted sum of goal deviations**: coverage (G1), requests (G2) and a "
+                                "workload-fairness goal (G3).")
+                    time_limit_gp = st.slider("GP time limit (seconds)", 10, 900, 120, step=10, key="gp_tl")
+                    with st.expander("Goal weights (documented defaults: 1, 1, 1, 0.5)"):
+                        w1 = st.number_input("w1 - understaffing", 0.0, 100.0, DEFAULT_GP_WEIGHTS["w1"], 0.1, key="w1")
+                        w2 = st.number_input("w2 - request violations", 0.0, 100.0, DEFAULT_GP_WEIGHTS["w2"], 0.1, key="w2")
+                        w3 = st.number_input("w3 - overstaffing", 0.0, 100.0, DEFAULT_GP_WEIGHTS["w3"], 0.1, key="w3")
+                        w4 = st.number_input("w4 - workload deviation (per minute)", 0.0, 100.0,
+                                             DEFAULT_GP_WEIGHTS["w4"], 0.05, key="w4")
+                        custom = (w1, w2, w3, w4) != (DEFAULT_GP_WEIGHTS["w1"], DEFAULT_GP_WEIGHTS["w2"],
+                                                      DEFAULT_GP_WEIGHTS["w3"], DEFAULT_GP_WEIGHTS["w4"])
+                        if custom:
+                            st.warning("Non-default weights: results will differ from the documented GP run.")
+                    if st.button("▶ Run Goal Programming", key="run_gp", type="primary"):
+                        with st.spinner(f"Solving GP (time limit: {time_limit_gp}s) …"):
+                            result = solve_goal_program(dataset, time_limit=time_limit_gp, w1=w1, w2=w2, w3=w3, w4=w4)
+                            val = validate_solution(dataset, result.assignments)
+                        st.session_state["gp_result"], st.session_state["val_gp"] = result, val
+                        st.session_state["comparison"] = None
+
+                    if has_reference(dataset, "gp"):
+                        prov = reference_provenance(dataset, "gp") or {}
+                        if st.button("⚡ Load saved reference solution (GP, default weights)", key="load_gp"):
+                            try:
+                                result = load_reference(dataset, "gp")
+                                st.session_state["gp_result"] = result
+                                st.session_state["val_gp"] = validate_solution(dataset, result.assignments)
+                                st.session_state["comparison"] = None
+                            except ReferenceSolutionError as e:
+                                st.error(str(e))
+                        st.caption(f"Saved run: {prov.get('status')}, objective {prov.get('objective'):g}, "
+                                   f"{prov.get('solve_time_s')} s, {(prov.get('solver') or {}).get('library', '')}.")
+                    r = st.session_state["gp_result"]
+                    if r is not None:
+                        _status_banner(r)
+                        st.write(f"GP objective: **{r.gp_objective_value}** (not comparable with the IP/benchmark objective)")
+
+    with opt_tab2:
+        st.subheader("System Architecture & Mathematical Specifications")
         st.markdown(
-            "Choose a model and click **Run**. Solvers use CBC (COIN-OR) through PuLP, single-threaded. "
-            "Instance 3 takes roughly **2-3 minutes** for the IP to *prove* optimality and under a minute for "
-            "the GP; Instances 1-2 take a second or two. If the time limit is reached first, the result is "
-            "shown as **feasible, not proven optimal**."
+            "Both models share the same **binary roster variables** and the same **hard constraints**; they "
+            "differ in how the soft requirements are turned into an objective. The Integer Programming model "
+            "is the benchmark's own objective; the Goal Programming model rewrites the soft requirements as "
+            "goals with deviation variables and adds a workload-fairness goal."
         )
-        info = benchmark_info(dataset)
-        if info and (has_reference(dataset, "ip") or has_reference(dataset, "gp")):
-            st.caption("⚡ A saved, verified reference solution exists for this instance - use the "
-                       "'Load saved reference' buttons to skip the waiting time (e.g. for a live demo).")
 
-        col_ip, col_gp = st.columns(2)
+        st.markdown("#### Decision Variables Matrix")
+        st.latex(r"x_{n,d,s}\in\{0,1\}\ \text{(nurse } n \text{ works shift } s \text{ on day } d),\quad "
+                 r"y_{n,d}=\sum_s x_{n,d,s},\quad z_{n,w}\in\{0,1\}\ \text{(works weekend } w)")
 
-        # ── IP ────────────────────────────────────────────────────────────────
-        with col_ip:
+        st.markdown("#### The 9 Clinical Hard Constraints")
+        st.markdown(
+            "1. **One shift per day** - $\\sum_s x_{n,d,s}=y_{n,d}\\le 1$.\n"
+            "2. **Valid shifts** - $x_{n,d,s}=0$ if $s$ is not allowed by the nurse's contracts.\n"
+            "3. **Fixed assignments** - $y_{n,d}=0$ on the fixed days off.\n"
+            "4. **Workload bounds** - $\\text{MinWL}_n\\le\\sum_{d,s}L_s\\,x_{n,d,s}\\le\\text{MaxWL}_n$.\n"
+            "5. **Maximum shifts of a type** - $\\sum_d x_{n,d,s}\\le \\text{MaxTot}_{n,s}$.\n"
+            "6. **Minimum rest** (840 min) - forbidden successions derived from start time + duration "
+            "(Late→Early, Late→Day, Day→Early in Instance 3): $x_{n,d,s_1}+x_{n,d+1,s_2}\\le 1$.\n"
+            "7. **Maximum consecutive working days** - $\\sum_{k=0}^{M}y_{n,d+k}\\le M$ for every window of $M+1$ days.\n"
+            "8. **Minimum consecutive working days / days off** - a block that starts inside the horizon must "
+            "last at least the minimum (blocks touching the horizon boundary are exempt).\n"
+            "9. **Weekends** - $z_{n,w}\\ge y_{n,\\text{Sat}},\\ z_{n,w}\\ge y_{n,\\text{Sun}},\\ "
+            "z_{n,w}\\le y_{n,\\text{Sat}}+y_{n,\\text{Sun}}$ and $\\sum_w z_{n,w}\\le \\text{MaxWeekends}_n$."
+        )
+
+        c_spec1, c_spec2 = st.columns(2)
+        with c_spec1:
             with st.container(border=True):
-                st.subheader("Integer Programming (IP)")
-                st.markdown("Minimises the **benchmark objective**:  \n"
-                            "Σ (min-weight × understaffing) + Σ (max-weight × overstaffing) + Σ (request weight × violation)")
-                time_limit_ip = st.slider("IP time limit (seconds)", 10, 900, 300, step=10, key="ip_tl")
-                if st.button("▶ Run Integer Programming", key="run_ip", type="primary"):
-                    with st.spinner(f"Solving IP (time limit: {time_limit_ip}s) …"):
-                        result = solve_integer_program(dataset, time_limit=time_limit_ip)
-                        val = validate_solution(dataset, result.assignments)
-                    st.session_state["ip_result"], st.session_state["val_ip"] = result, val
-                    st.session_state["comparison"] = None
+                st.markdown("##### Model 1 - Integer Programming")
+                st.latex(r"\min Z_{IP}=\sum_{d,s}c^{min}_{d,s}\,u_{d,s}+\sum_{d,s}c^{max}_{d,s}\,o_{d,s}"
+                         r"+\sum_i a_i\,v^{on}_i+\sum_i b_i\,v^{off}_i")
+                st.latex(r"\sum_n x_{n,d,s}+u_{d,s}\ge R^{min}_{d,s},\qquad \sum_n x_{n,d,s}-o_{d,s}\le R^{max}_{d,s},"
+                         r"\qquad x_{n,d,s}+v^{on}_i\ge 1,\qquad x_{n,d,s}-v^{off}_i\le 0")
+                st.caption("Benchmark optimum on Instance 3 is proven at **1001**.")
 
-                if has_reference(dataset, "ip"):
-                    prov = reference_provenance(dataset, "ip") or {}
-                    if st.button("⚡ Load saved reference solution (IP)", key="load_ip"):
-                        try:
-                            result = load_reference(dataset, "ip")
-                            st.session_state["ip_result"] = result
-                            st.session_state["val_ip"] = validate_solution(dataset, result.assignments)
-                            st.session_state["comparison"] = None
-                        except ReferenceSolutionError as e:
-                            st.error(str(e))
-                    st.caption(f"Saved run: {prov.get('status')}, objective {prov.get('objective'):g}, "
-                               f"{prov.get('solve_time_s')} s, {(prov.get('solver') or {}).get('library', '')}.")
-                r = st.session_state["ip_result"]
-                if r is not None:
-                    _status_banner(r)
-                    st.write(f"Objective: **{r.objective_value}**")
-
-        # ── GP ────────────────────────────────────────────────────────────────
-        with col_gp:
+        with c_spec2:
             with st.container(border=True):
-                st.subheader("Goal Programming (GP)")
-                st.markdown("Minimises a **weighted sum of goal deviations**: coverage (G1), requests (G2) and a "
-                            "workload-fairness goal (G3).")
-                time_limit_gp = st.slider("GP time limit (seconds)", 10, 900, 120, step=10, key="gp_tl")
-                with st.expander("Goal weights (documented defaults: 1, 1, 1, 0.5)"):
-                    w1 = st.number_input("w1 - understaffing", 0.0, 100.0, DEFAULT_GP_WEIGHTS["w1"], 0.1, key="w1")
-                    w2 = st.number_input("w2 - request violations", 0.0, 100.0, DEFAULT_GP_WEIGHTS["w2"], 0.1, key="w2")
-                    w3 = st.number_input("w3 - overstaffing", 0.0, 100.0, DEFAULT_GP_WEIGHTS["w3"], 0.1, key="w3")
-                    w4 = st.number_input("w4 - workload deviation (per minute)", 0.0, 100.0,
-                                         DEFAULT_GP_WEIGHTS["w4"], 0.05, key="w4")
-                    custom = (w1, w2, w3, w4) != (DEFAULT_GP_WEIGHTS["w1"], DEFAULT_GP_WEIGHTS["w2"],
-                                                  DEFAULT_GP_WEIGHTS["w3"], DEFAULT_GP_WEIGHTS["w4"])
-                    if custom:
-                        st.warning("Non-default weights: results will differ from the documented GP run.")
-                if st.button("▶ Run Goal Programming", key="run_gp", type="primary"):
-                    with st.spinner(f"Solving GP (time limit: {time_limit_gp}s) …"):
-                        result = solve_goal_program(dataset, time_limit=time_limit_gp, w1=w1, w2=w2, w3=w3, w4=w4)
-                        val = validate_solution(dataset, result.assignments)
-                    st.session_state["gp_result"], st.session_state["val_gp"] = result, val
-                    st.session_state["comparison"] = None
-
-                if has_reference(dataset, "gp"):
-                    prov = reference_provenance(dataset, "gp") or {}
-                    if st.button("⚡ Load saved reference solution (GP, default weights)", key="load_gp"):
-                        try:
-                            result = load_reference(dataset, "gp")
-                            st.session_state["gp_result"] = result
-                            st.session_state["val_gp"] = validate_solution(dataset, result.assignments)
-                            st.session_state["comparison"] = None
-                        except ReferenceSolutionError as e:
-                            st.error(str(e))
-                    st.caption(f"Saved run: {prov.get('status')}, objective {prov.get('objective'):g}, "
-                               f"{prov.get('solve_time_s')} s, {(prov.get('solver') or {}).get('library', '')}.")
-                r = st.session_state["gp_result"]
-                if r is not None:
-                    _status_banner(r)
-                    st.write(f"GP objective: **{r.gp_objective_value}** (not comparable with the IP/benchmark objective)")
+                st.markdown("##### Model 2 - Goal Programming")
+                st.latex(r"\text{G1: }\sum_n x_{n,d,s}+d^-_{d,s}-d^+_{d,s}=R^{min}_{d,s}\qquad "
+                         r"\text{G3: }\sum_{d,s}L_s\,x_{n,d,s}+wp^-_n-wp^+_n=T_n,\quad T_n=\tfrac{\text{MinWL}_n+\text{MaxWL}_n}{2}")
+                st.latex(r"\text{G2: }x_{n,d,s}+v^{on}_i\ge 1,\qquad x_{n,d,s}-v^{off}_i\le 0")
+                st.latex(r"\min Z_{GP}=w_1\!\sum c^{min}_{d,s}d^-_{d,s}+w_3\!\sum c^{max}_{d,s}d^+_{d,s}"
+                         r"+w_2\!\Big(\sum a_i v^{on}_i+\sum b_i v^{off}_i\Big)+w_4\sum_n\big(wp^+_n+wp^-_n\big)")
+                st.caption("Default weights: w1=1, w2=1, w3=1, w4=0.5. Switch point at w4 = 0.208.")
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 5. RESULTS
+# 4. MASTER SCHEDULE & RESULTS (Unified View)
 # ─────────────────────────────────────────────────────────────────────────────
 
-elif section == "📈 Results":
+elif section == "📅 Master Schedule & Results":
     _cockpit_header(
-        title="Optimization Results & Clinical Verification",
-        subtitle="Verification of solution optimality, independent constraint auditing, coverage distribution, and preference penalties.",
-        dept="CLINICAL QUALITY & AUDIT",
-        status="SOLUTIONS VERIFIED",
+        title="Master Roster Schedule & Clinical Audit",
+        subtitle="Unified clinical results console: solution status verification, shift roster visualization, staffing compliance, and CSV exports.",
+        dept="WARD OPERATIONS & CLINICAL DISPATCH",
+        status="RESULTS & ROSTER READY",
     )
-    st.title("Optimization results")
     ip, gp = st.session_state["ip_result"], st.session_state["gp_result"]
     val_ip, val_gp = st.session_state["val_ip"], st.session_state["val_gp"]
     dataset = st.session_state["dataset"]
 
-    def _common_tables(res, key):
-        cs = coverage_summary(dataset, res)
+    if dataset is None:
+        _need_dataset()
+    elif not (_solved(ip) or _solved(gp)):
+        if ip is not None and not _solved(ip):
+            _status_banner(ip)
+        elif gp is not None and not _solved(gp):
+            _status_banner(gp)
+        else:
+            st.info("Run at least one model on the ⚙️ Optimization Cockpit page first.")
+    else:
+        options = [n for n, r in (("IP", ip), ("GP", gp)) if _solved(r)]
+        model_choice = st.radio("Select model to display:", options, horizontal=True, key="roster_model")
+        result = ip if model_choice == "IP" else gp
+        val = val_ip if model_choice == "IP" else val_gp
+
+        # ── Top KPI Scorecard ─────────────────────────────────────────────────
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Status", "Optimal ✓" if result.proven_optimal else result.status)
+        c2.metric("Objective", result.objective_value if model_choice == "IP" else result.gp_objective_value)
+        c3.metric("Solve time", f"{result.solve_time:.1f}s")
+        c4.metric("Hard-constraint validation", "✅ Pass" if (val and val.is_feasible) else "❌ Fail")
+
+        _status_banner(result)
+
+        if val is not None:
+            if val.is_feasible:
+                st.success("✅ All hard constraints satisfied (independent check).")
+            else:
+                st.error(f"❌ {len(val.errors)} hard constraint violation(s) detected.")
+                with st.expander("Show errors"):
+                    for e in val.errors:
+                        st.write(f"- {e}")
+
+        # Benchmark accuracy block (for IP)
+        if model_choice == "IP":
+            if result.benchmark_reference is not None:
+                gap = result.benchmark_gap_percent
+                st.markdown(
+                    f"| | Value |\n|---|---|\n"
+                    f"| IP objective | **{result.objective_value:g}** |\n"
+                    f"| Best known value (= lower bound, proven optimum) | **{result.benchmark_reference:g}** |\n"
+                    f"| Gap | **{gap:.4f}%** |\n"
+                    f"| Optimality of this IP solution | **{'proven by CBC' if result.proven_optimal else 'NOT proven (time limit)'}** |"
+                )
+                st.caption("Gap = (IP objective − best known) / best known × 100. A gap of 0 with a proven "
+                           "status means the model reproduces the benchmark's optimum exactly.")
+            else:
+                st.info("This dataset is not a published benchmark instance - no reference value available.")
+        else:
+            st.info("The GP objective cannot be compared with the benchmark value - it contains a "
+                    "workload-fairness term the benchmark does not have.")
+
+        # ── Master Roster Schedule ────────────────────────────────────────────
+        st.subheader("Master Nurse Roster Schedule")
+        legend_html = '<div class="roster-legend-bar"><span style="font-weight:700; color:#38bdf8; margin-right:4px;">Shift Legend:</span>'
+        shift_colors = sc.shift_colours(dataset) if dataset else {}
+        for sid, col in sorted(shift_colors.items()):
+            label = dataset.shift_types[sid].label if dataset and sid in dataset.shift_types else sid
+            legend_html += f'<span class="legend-pill"><span class="legend-box" style="background-color: {col};"></span> Shift {sid} ({label})</span>'
+        legend_html += '<span class="legend-pill"><span class="legend-box" style="background-color: #64748b;"></span> Day Off (-)</span></div>'
+        st.markdown(legend_html, unsafe_allow_html=True)
+
+        _roster_df = roster_table(dataset, result)
+        st.dataframe(style_roster(_roster_df, dataset), height=36 * (len(_roster_df) + 1) + 4, **STRETCH)
+        st.caption("Colours follow the shift colours defined in the XML; grey '-' = day off.")
+
+        c_dl1, c_dl2 = st.columns(2)
+        c_dl1.download_button("⬇️ Roster as CSV (long format)", roster_long_csv(dataset, result),
+                              file_name=f"roster_{model_choice.lower()}_long.csv", mime="text/csv")
+        c_dl2.download_button("⬇️ Roster as CSV (nurse × day)", roster_table(dataset, result).to_csv().encode("utf-8"),
+                              file_name=f"roster_{model_choice.lower()}.csv", mime="text/csv")
+
+        # ── Deep-Dive Operational Tabs ────────────────────────────────────────
+        st.subheader("Clinical Audit & Deep-Dive Analytics")
+        cs = coverage_summary(dataset, result)
         cols = st.columns(len(cs))
         for c, (k, v) in zip(cols, cs.items()):
             c.metric(k, v)
+
         t1, t2, t3, t4, t5 = st.tabs(["Shift-wise staffing", "Day-wise assignments", "Understaffed slots",
                                       "Request violations", "Workload per nurse"])
         with t1:
-            st.dataframe(shiftwise_staffing(dataset, res), hide_index=True, **STRETCH)
+            st.dataframe(shiftwise_staffing(dataset, result), hide_index=True, **STRETCH)
         with t2:
-            st.dataframe(daywise_assignments(dataset, res), hide_index=True, **STRETCH)
+            st.dataframe(daywise_assignments(dataset, result), hide_index=True, **STRETCH)
         with t3:
-            u = understaffed_slots(dataset, res)
+            u = understaffed_slots(dataset, result)
             if u.empty:
                 st.success("Every day-shift meets its minimum requirement.")
             else:
                 st.dataframe(u, hide_index=True, **STRETCH)
         with t4:
-            v = violations_table(dataset, res)
+            v = violations_table(dataset, result)
             if v.empty:
                 st.success("All shift requests are satisfied.")
             else:
                 st.dataframe(v, hide_index=True, **STRETCH)
         with t5:
-            wt = workload_table(dataset, res)
+            wt = workload_table(dataset, result)
             st.dataframe(wt, hide_index=True, **STRETCH)
             wl = wt["Workload (min)"]
             st.caption(f"Workload range: {wl.max() - wl.min()} min (max {wl.max()}, min {wl.min()}).")
 
-    if dataset is None:
-        _need_dataset()
-    elif ip is None and gp is None:
-        st.info("Run at least one model on the ⚙️ Optimization page first.")
-    else:
-        tab_ip, tab_gp = st.tabs(["Integer Programming", "Goal Programming"])
-
-        with tab_ip:
-            if ip is None:
-                st.info("IP has not been run yet.")
-            elif not _solved(ip):
-                _status_banner(ip)
-            else:
-                _status_banner(ip)
-                c1, c2, c3, c4 = st.columns(4)
-                c1.metric("Status", "Optimal ✓" if ip.proven_optimal else ip.status)
-                c2.metric("Objective", ip.objective_value)
-                c3.metric("Solve time", f"{ip.solve_time:.1f}s")
-                c4.metric("Hard-constraint validation", "✅ Pass" if (val_ip and val_ip.is_feasible) else "❌ Fail")
-
-                st.subheader("Benchmark")
-                if ip.benchmark_reference is None:
-                    st.info("This dataset is not a published benchmark instance - no reference value available.")
-                else:
-                    gap = ip.benchmark_gap_percent
-                    st.markdown(
-                        f"| | Value |\n|---|---|\n"
-                        f"| IP objective | **{ip.objective_value:g}** |\n"
-                        f"| Best known value (= lower bound, proven optimum) | **{ip.benchmark_reference:g}** |\n"
-                        f"| Gap | **{gap:.4f}%** |\n"
-                        f"| Optimality of this IP solution | **{'proven by CBC' if ip.proven_optimal else 'NOT proven (time limit)'}** |"
-                    )
-                    st.caption("Gap = (IP objective − best known) / best known × 100. A gap of 0 with a proven "
-                               "status means the model reproduces the benchmark's optimum exactly.")
-                st.subheader("Objective by component")
-                st.plotly_chart(viz.create_ip_breakdown_chart(dataset, ip), key="res_ip_break", **STRETCH)
-                st.subheader("Staffing, requests and workload")
-                _common_tables(ip, "ip")
-
-        with tab_gp:
-            if gp is None:
-                st.info("GP has not been run yet.")
-            elif not _solved(gp):
-                _status_banner(gp)
-            else:
-                _status_banner(gp)
-                c1, c2, c3, c4 = st.columns(4)
-                c1.metric("Status", "Optimal ✓" if gp.proven_optimal else gp.status)
-                c2.metric("GP objective", gp.gp_objective_value)
-                c3.metric("Solve time", f"{gp.solve_time:.1f}s")
-                c4.metric("Hard-constraint validation", "✅ Pass" if (val_gp and val_gp.is_feasible) else "❌ Fail")
-                st.info("The GP objective cannot be compared with the benchmark value - it contains a "
-                        "workload-fairness term the benchmark does not have.")
-                st.subheader("Goal penalties (weighted)")
-                g1, g2, g3, g4 = st.columns(4)
-                g1.metric("Understaffing (G1, w1)", gp.total_understaffing_penalty)
-                g2.metric("Overstaffing (G1, w3)", gp.total_overstaffing_penalty)
-                g3.metric("Requests (G2, w2)", gp.total_request_penalty)
-                g4.metric("Fairness (G3, w4)", gp.workload_fairness_penalty)
-                st.caption("Weights used: " + ", ".join(f"{k} = {v:g}" for k, v in gp.weights.items()))
-                st.plotly_chart(viz.create_gp_breakdown_chart(gp), key="res_gp_break", **STRETCH)
-                st.subheader("Staffing, requests and workload")
-                _common_tables(gp, "gp")
-
 # ─────────────────────────────────────────────────────────────────────────────
-# 6. VISUALIZATIONS
+# 5. EXECUTIVE COMPARISON SCOREBOARD
 # ─────────────────────────────────────────────────────────────────────────────
 
-elif section == "🖼️ Visualizations":
-    _cockpit_header(
-        title="Interactive Clinical Visualization Hub",
-        subtitle="Dynamic visual analytics depicting ward shift distributions, coverage deficits, workload Lorenz curves, and request satisfaction.",
-        dept="DECISION SUPPORT VISUALS",
-        status="CHARTS RENDERED",
-    )
-    st.title("Visualizations")
-    dataset = st.session_state["dataset"]
-    ip, gp = st.session_state["ip_result"], st.session_state["gp_result"]
-
-    if dataset is None:
-        _need_dataset()
-    elif not (_solved(ip) or _solved(gp)):
-        st.info("Run at least one model (⚙️ Optimization) to see solution charts. Charts of the raw data "
-                "are on the 📊 Statistics page.")
-    else:
-        comp = st.session_state["comparison"]
-        if _solved(ip) and _solved(gp) and comp is None:
-            comp = compare_optimization_results(ip, gp, dataset)
-            st.session_state["comparison"] = comp
-
-        options = [n for n, r in (("IP", ip), ("GP", gp)) if _solved(r)]
-        model = st.radio("Show single-model charts for", options, horizontal=True, key="viz_model")
-        res = ip if model == "IP" else gp
-
-        t1, t2, t3, t4 = st.tabs(["Coverage", "Roster", "Workload & fairness", "Requests & benchmark"])
-        with t1:
-            st.plotly_chart(viz.create_coverage_chart(dataset, res), key="v_cov", **STRETCH)
-            st.plotly_chart(viz.create_shortfall_heatmap(dataset, res), key="v_short", **STRETCH)
-            if comp is not None:
-                st.plotly_chart(viz.create_ip_gp_coverage_chart(comp), key="v_cov_cmp", **STRETCH)
-        with t2:
-            st.plotly_chart(viz.create_roster_heatmap(res, dataset), key="v_roster", **STRETCH)
-            if _solved(ip) and _solved(gp):
-                st.plotly_chart(viz.create_shift_distribution_chart(ip, gp, dataset), key="v_shift", **STRETCH)
-        with t3:
-            if comp is not None:
-                st.plotly_chart(viz.create_workload_chart(comp), key="v_wl", **STRETCH)
-                st.plotly_chart(viz.create_fairness_chart(comp), key="v_fair", **STRETCH)
-            else:
-                st.info("Run **both** models to see the workload and fairness comparison.")
-        with t4:
-            if comp is not None:
-                st.plotly_chart(viz.create_request_chart(comp), key="v_req", **STRETCH)
-            else:
-                st.info("Run **both** models to compare request violations.")
-            if _solved(ip):
-                st.caption("The benchmark chart shows the IP objective only - the GP objective is not comparable.")
-                if comp is not None:
-                    st.plotly_chart(viz.create_benchmark_chart(comp), key="v_bench", **STRETCH)
-                elif ip.benchmark_reference is not None:
-                    st.metric("IP objective", ip.objective_value, delta=f"{ip.objective_value - ip.benchmark_reference:g} vs best known",
-                              delta_color="inverse")
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 7. COMPARISON
-# ─────────────────────────────────────────────────────────────────────────────
-
-elif section == "⚖️ Comparison":
+elif section == "⚖️ Executive Comparison":
     _cockpit_header(
         title="Executive Scoreboard: Integer vs Goal Programming",
-        subtitle="Side-by-side comparative trade-off analysis evaluating coverage rates, preference satisfaction, and nurse workload equity.",
+        subtitle="Side-by-side comparative decision-support evaluation balancing patient coverage against nurse preference satisfaction and workload equity.",
         dept="EXECUTIVE DECISION BOARD",
         status="COMPARATIVE EVALUATION",
     )
-    st.title("IP vs GP comparison")
     ip, gp = st.session_state["ip_result"], st.session_state["gp_result"]
     dataset = st.session_state["dataset"]
 
@@ -1139,62 +979,12 @@ elif section == "⚖️ Comparison":
         st.download_button("⬇️ Download comparison (JSON)", json.dumps(comparison_to_dict(comp), indent=2).encode("utf-8"),
                            file_name="ip_vs_gp_comparison.json", mime="application/json")
 
-# ─────────────────────────────────────────────────────────────────────────────
-# 8. ROSTER
-# ─────────────────────────────────────────────────────────────────────────────
-
-elif section == "📅 Roster":
-    _cockpit_header(
-        title="Master Hospital Ward Schedule",
-        subtitle="Final verified nurse-by-day scheduling matrix rendered in official XML shift colors, with daily coverage tallies and export capabilities.",
-        dept="WARD OPERATIONS & DISPATCH",
-        status="ROSTER READY",
-    )
-    st.title("Roster")
-    ip, gp = st.session_state["ip_result"], st.session_state["gp_result"]
-    val_ip, val_gp = st.session_state["val_ip"], st.session_state["val_gp"]
-    dataset = st.session_state["dataset"]
-
-    if dataset is None:
-        _need_dataset()
-    elif not (_solved(ip) or _solved(gp)):
-        st.info("Run at least one model on the ⚙️ Optimization page.")
-    else:
-        options = [n for n, r in (("IP", ip), ("GP", gp)) if _solved(r)]
-        model_choice = st.radio("Select model to display:", options, horizontal=True, key="roster_model")
-        result = ip if model_choice == "IP" else gp
-        val = val_ip if model_choice == "IP" else val_gp
-
-        st.caption(f"{model_choice}: {_status_label(result)} · source: {result.source}")
-        if val is not None:
-            if val.is_feasible:
-                st.success("✅ All hard constraints satisfied (independent check).")
-            else:
-                st.error(f"❌ {len(val.errors)} hard constraint violation(s) detected.")
-                with st.expander("Show errors"):
-                    for e in val.errors:
-                        st.write(f"- {e}")
-
-        # Shift Color Legend Bar
-        legend_html = '<div class="roster-legend-bar"><span style="font-weight:700; color:#38bdf8; margin-right:4px;">Shift Legend:</span>'
-        shift_colors = sc.shift_colours(dataset) if dataset else {}
-        for sid, col in sorted(shift_colors.items()):
-            label = dataset.shift_types[sid].label if dataset and sid in dataset.shift_types else sid
-            legend_html += f'<span class="legend-pill"><span class="legend-box" style="background-color: {col};"></span> Shift {sid} ({label})</span>'
-        legend_html += '<span class="legend-pill"><span class="legend-box" style="background-color: #64748b;"></span> Day Off (-)</span></div>'
-        st.markdown(legend_html, unsafe_allow_html=True)
-
-        _roster_df = roster_table(dataset, result)
-        st.dataframe(style_roster(_roster_df, dataset), height=36 * (len(_roster_df) + 1) + 4, **STRETCH)
-        st.caption("Colours follow the shift colours defined in the XML; grey '-' = day off.")
-
-        st.subheader("Staffing per day")
-        st.dataframe(daywise_assignments(dataset, result), hide_index=True, **STRETCH)
-
-        c1, c2 = st.columns(2)
-        c1.download_button("⬇️ Roster as CSV (long format)", roster_long_csv(dataset, result),
-                           file_name=f"roster_{model_choice.lower()}_long.csv", mime="text/csv")
-        c2.download_button("⬇️ Roster as CSV (nurse × day)", roster_table(dataset, result).to_csv().encode("utf-8"),
-                           file_name=f"roster_{model_choice.lower()}.csv", mime="text/csv")
+        st.subheader("Visual Comparison Charts")
+        v_col1, v_col2 = st.columns(2)
+        v_col1.plotly_chart(viz.create_ip_gp_coverage_chart(comp), key="cmp_cov", **STRETCH)
+        v_col2.plotly_chart(viz.create_shift_distribution_chart(ip, gp, dataset), key="cmp_shift", **STRETCH)
+        v_col3, v_col4 = st.columns(2)
+        v_col3.plotly_chart(viz.create_workload_chart(comp), key="cmp_wl", **STRETCH)
+        v_col4.plotly_chart(viz.create_fairness_chart(comp), key="cmp_fair", **STRETCH)
 
 _render_session_status()

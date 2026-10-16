@@ -18,8 +18,13 @@ from src.validation import validate_solution
 from tests.common import ROOT, dataset, reference
 
 APP = os.path.join(ROOT, "app.py")
-PAGES = ["📁 Dataset", "📊 Statistics", "📘 Model", "⚙️ Optimization", "📈 Results",
-         "🖼️ Visualizations", "⚖️ Comparison", "📅 Roster"]
+PAGES = [
+    "🏥 Ward Ingestion & Setup",
+    "📊 Staffing Analytics",
+    "⚙️ Optimization Cockpit",
+    "📅 Master Schedule & Results",
+    "⚖️ Executive Comparison",
+]
 STAT_CHOICES = ["Overview", "Staffing demand", "Nurses & contracts", "Requests & fixed days off", "Data tables"]
 
 
@@ -41,7 +46,7 @@ def loaded(name="Instance3", with_results=False):
     at.session_state["dataset_label"] = name + ".xml"
     at.run()
     if with_results:
-        go(at, "⚙️ Optimization")
+        go(at, "⚙️ Optimization Cockpit")
         at.button(key="load_ip").click().run()
         at.button(key="load_gp").click().run()
     return at
@@ -77,8 +82,8 @@ class TestColdStart(unittest.TestCase):
         for page in PAGES[1:]:
             go(at, page)
             self.assertEqual(len(at.exception), 0, page)
-        # the model page needs no data; the rest ask for it / for a run
-        go(at, "📘 Model")
+        # the optimization page contains the mathematical specifications (latex)
+        go(at, "⚙️ Optimization Cockpit")
         self.assertGreater(len(at.latex), 0)
 
 
@@ -115,11 +120,10 @@ class TestDatasetPage(unittest.TestCase):
 class TestStatisticsPage(unittest.TestCase):
     def test_every_statistics_choice_renders_with_charts(self):
         at = loaded("Instance3")
-        go(at, "📊 Statistics")
+        go(at, "📊 Staffing Analytics")
         for choice in STAT_CHOICES:
             at.radio(key="stats_choice").set_value(choice).run()
             self.assertEqual(len(at.exception), 0, choice)
-        # chart-bearing choices
         expected_charts = {"Overview": 1, "Staffing demand": 4, "Nurses & contracts": 2, "Requests & fixed days off": 3}
         for choice, n in expected_charts.items():
             at.radio(key="stats_choice").set_value(choice).run()
@@ -127,7 +131,7 @@ class TestStatisticsPage(unittest.TestCase):
 
     def test_overview_shows_the_real_numbers(self):
         at = loaded("Instance3")
-        go(at, "📊 Statistics")
+        go(at, "📊 Staffing Analytics")
         labels = {m.label: m.value for m in at.metric}
         self.assertEqual(labels["Nurses"], "20")
         self.assertEqual(labels["Required nurse-shifts (sum of Min)"], "154")
@@ -136,7 +140,7 @@ class TestStatisticsPage(unittest.TestCase):
     def test_statistics_work_for_other_instances(self):
         for name in ("Instance1", "Instance2", "Instance4"):
             at = loaded(name)
-            go(at, "📊 Statistics")
+            go(at, "📊 Staffing Analytics")
             for choice in STAT_CHOICES:
                 at.radio(key="stats_choice").set_value(choice).run()
                 self.assertEqual(len(at.exception), 0, f"{name}/{choice}")
@@ -155,7 +159,7 @@ class TestOptimizationAndResults(unittest.TestCase):
 
     def test_results_page_states_proof_of_optimality_and_zero_gap(self):
         at = loaded("Instance3", with_results=True)
-        go(at, "📈 Results")
+        go(at, "📅 Master Schedule & Results")
         self.assertIn("Proven optimal", texts(at.success))
         md = texts(at.markdown)
         self.assertIn("1001", md)
@@ -164,23 +168,16 @@ class TestOptimizationAndResults(unittest.TestCase):
 
     def test_comparison_page_contents(self):
         at = loaded("Instance3", with_results=True)
-        go(at, "⚖️ Comparison")
+        go(at, "⚖️ Executive Comparison")
         self.assertEqual(len(at.table), 4)                           # overview, coverage, requests, workload
         overview = at.table[0].value
         self.assertIn("✅ proven optimal", overview.loc[overview["Metric"] == "Solution status", "IP"].iloc[0])
         self.assertEqual(overview.loc[overview["Metric"] == "Hard-constraint validation", "IP"].iloc[0], "✅ Pass")
         self.assertIn("equals the best-known", texts(at.markdown))
 
-    def test_visualization_page_has_all_chart_groups(self):
-        at = loaded("Instance3", with_results=True)
-        go(at, "🖼️ Visualizations")
-        self.assertGreaterEqual(len(at.get("plotly_chart")), 3)
-        at.radio(key="viz_model").set_value("GP").run()
-        self.assertEqual(len(at.exception), 0)
-
     def test_roster_page_for_both_models(self):
         at = loaded("Instance3", with_results=True)
-        go(at, "📅 Roster")
+        go(at, "📅 Master Schedule & Results")
         self.assertIn("All hard constraints satisfied", texts(at.success))
         at.radio(key="roster_model").set_value("GP").run()
         self.assertEqual(len(at.exception), 0)
@@ -195,20 +192,20 @@ class TestOptimizationAndResults(unittest.TestCase):
         at.session_state["ip_result"] = r
         at.session_state["val_ip"] = validate_solution(ds, r.assignments)
         at.run()
-        go(at, "📈 Results")
+        go(at, "📅 Master Schedule & Results")
         self.assertEqual(len(at.exception), 0)
         self.assertIn("NOT proven optimal", texts(at.warning))
         self.assertIn("NOT proven", texts(at.markdown))
 
     def test_custom_gp_weights_show_a_warning(self):
         at = loaded("Instance3")
-        go(at, "⚙️ Optimization")
+        go(at, "⚙️ Optimization Cockpit")
         at.number_input(key="w4").set_value(0.3).run()
         self.assertIn("Non-default weights", texts(at.warning))
 
     def test_end_to_end_live_run_on_instance1(self):
         at = loaded("Instance1")
-        go(at, "⚙️ Optimization")
+        go(at, "⚙️ Optimization Cockpit")
         at.button(key="run_ip").click().run()
         at.button(key="run_gp").click().run()
         self.assertEqual(len(at.exception), 0)
@@ -216,7 +213,7 @@ class TestOptimizationAndResults(unittest.TestCase):
         self.assertEqual((ip.status, ip.objective_value, ip.source), ("Optimal", 607.0, "live solve"))
         self.assertEqual((gp.status, gp.gp_objective_value), ("Optimal", 716.0))
         self.assertTrue(at.session_state["val_ip"].is_feasible and at.session_state["val_gp"].is_feasible)
-        for page in PAGES[4:]:
+        for page in PAGES[3:]:
             go(at, page)
             self.assertEqual(len(at.exception), 0, page)
 
@@ -226,14 +223,14 @@ class TestOptimizationAndResults(unittest.TestCase):
         at = fresh()
         at.session_state["dataset"] = ds
         at.run()
-        go(at, "⚙️ Optimization")
+        go(at, "⚙️ Optimization Cockpit")
         keys = [b.key for b in at.button]
         self.assertNotIn("load_ip", keys)
         self.assertIn("run_ip", keys)
 
 
 class TestFailurePaths(unittest.TestCase):
-    """A solve that returns no solution must never crash the UI (it used to raise a TypeError)."""
+    """A solve that returns no solution must never crash the UI."""
 
     def test_no_solution_result_renders_everywhere(self):
         ds = dataset("Instance3")
@@ -246,10 +243,10 @@ class TestFailurePaths(unittest.TestCase):
         at.session_state["ip_result"] = bad
         at.session_state["val_ip"] = validate_solution(ds, {})
         at.run()
-        for page in ["⚙️ Optimization", "📈 Results", "🖼️ Visualizations", "⚖️ Comparison", "📅 Roster"]:
+        for page in PAGES:
             go(at, page)
             self.assertEqual(len(at.exception), 0, page)
-        go(at, "📈 Results")
+        go(at, "📅 Master Schedule & Results")
         self.assertIn("No solution was found", texts(at.error))
 
     def test_reset_session_clears_everything(self):
